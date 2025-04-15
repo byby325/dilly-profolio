@@ -407,3 +407,12 @@ cd dilly-portfolio
 
 # 推送到您的 Fork
 git push origin feature/new-feature 
+
+# 確保您在 Fork 的本地複製中
+cd dilly-portfolio
+
+# 構建專案
+npm run build || npx vite build
+
+# 部署到您自己的 Firebase 項目
+firebase deploy --project 您的項目ID 
