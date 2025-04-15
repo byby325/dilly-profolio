@@ -6,6 +6,11 @@
   // 使用響應式參考來操作動畫
   const arrowDownRef = ref(null)
   
+  // 導航到首頁（不保留錨點）
+  const goToHome = () => {
+    window.location.replace('/');
+  };
+  
   // 設置水平滾動效果
   const setupHorizontalScroll = () => {
     const scrollContainer = document.getElementById('horizontalScroll');
@@ -67,12 +72,12 @@
             >
               ABOUT <span class="ml-2">→</span>
             </RouterLink>
-            <RouterLink
-              to="/"
+            <button
+              @click="goToHome"
               class="px-8 py-4 bg-gray-900 text-white rounded-md hover:bg-gray-800 transition-colors text-lg font-medium flex items-center"
             >
               PROJECT <span class="ml-2">→</span>
-            </RouterLink>
+            </button>
           </div>
           
           <!-- Scroll Down Animation Container -->
