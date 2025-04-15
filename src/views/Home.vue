@@ -73,13 +73,13 @@
               to="/about"
               class="px-8 py-4 bg-gray-900 text-white rounded-md hover:bg-gray-800 transition-colors text-lg font-medium flex items-center"
             >
-              ABOUT <span class="ml-2">→</span>
+              ABOUT <span class="ml-2 text-white">→</span>
             </RouterLink>
             <button
               @click="goToHome"
               class="px-8 py-4 bg-gray-900 text-white rounded-md hover:bg-gray-800 transition-colors text-lg font-medium flex items-center"
             >
-              PROJECT <span class="ml-2">→</span>
+              PROJECT <span class="ml-2 text-white">→</span>
             </button>
           </div>
           

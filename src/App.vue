@@ -51,7 +51,7 @@ const handleImageError = (event: Event) => {
         
         <!-- Desktop Navigation -->
         <div class="hidden md:flex space-x-10 justify-end">
-          <RouterLink to="/#selected-projects" class="text-primary-600 hover:text-accent transition-colors font-medium">Project</RouterLink>
+          <RouterLink to="/" class="text-primary-600 hover:text-accent transition-colors font-medium">Project</RouterLink>
           <RouterLink to="/about" class="text-primary-600 hover:text-accent transition-colors font-medium">About</RouterLink>
           <RouterLink to="/resume" class="text-primary-600 hover:text-accent transition-colors font-medium">Resume</RouterLink>
         </div>
@@ -129,6 +129,7 @@ body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   overflow-x: hidden;
   width: 100%;
+  color: #18181b; /* primary-900 顏色 */
 }
 
 html {
@@ -145,6 +146,7 @@ html {
   width: 100%;
   min-width: 100%;
   overflow-x: hidden;
+  color: #18181b; /* primary-900 顏色 */
 }
 
 .router-link-active {

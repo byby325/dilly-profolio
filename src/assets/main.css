@@ -6,6 +6,17 @@
 @tailwind components;
 @tailwind utilities;
 
+/* 基礎樣式覆蓋 */
+@layer base {
+  html, body {
+    @apply text-primary-900;
+  }
+  
+  p, span, div, li, a {
+    @apply text-primary-900;
+  }
+}
+
 /* 自定義組件樣式 */
 @layer components {
   .btn {
