@@ -404,3 +404,6 @@ npx vite build
 # 克隆您的 Fork 到本地
 git clone https://github.com/您的用戶名/dilly-portfolio.git
 cd dilly-portfolio 
+
+# 推送到您的 Fork
+git push origin feature/new-feature 
