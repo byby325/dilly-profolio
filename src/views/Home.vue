@@ -8,7 +8,10 @@
   
   // 導航到首頁（不保留錨點）
   const goToHome = () => {
-    window.location.replace('/');
+    // 獲取當前 URL 的協議和主機部分
+    const baseUrl = window.location.protocol + '//' + window.location.host;
+    // 設置完整的 URL，不包含任何路徑和錨點
+    window.location.href = baseUrl;
   };
   
   // 設置水平滾動效果
