@@ -1,39 +1,30 @@
+/* 導入基礎樣式 */
 @import './base.css';
 
+/* Tailwind CSS 基礎指令 */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-#app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  font-weight: normal;
-}
-
-a,
-.green {
-  text-decoration: none;
-  color: hsla(160, 100%, 37%, 1);
-  transition: 0.4s;
-  padding: 3px;
-}
-
-@media (hover: hover) {
-  a:hover {
-    background-color: hsla(160, 100%, 37%, 0.2);
+/* 自定義組件樣式 */
+@layer components {
+  .btn {
+    @apply px-6 py-2 rounded-md font-medium transition-colors;
   }
-}
-
-@media (min-width: 1024px) {
-  body {
-    display: flex;
-    place-items: center;
+  
+  .btn-primary {
+    @apply bg-accent text-white hover:bg-accent-hover;
   }
-
-  #app {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    padding: 0 2rem;
+  
+  .btn-outline {
+    @apply border border-primary-300 hover:bg-primary-100 text-primary-800;
+  }
+  
+  .section-title {
+    @apply text-2xl md:text-3xl font-bold mb-6;
+  }
+  
+  .card {
+    @apply bg-white rounded-lg shadow-md overflow-hidden;
   }
 }

@@ -1,0 +1,18 @@
+{
+  "projects": {
+    "default": "dilly-portfolio"
+  },
+  "targets": {
+    "dilly-portfolio": {
+      "hosting": {
+        "testing": [
+          "dilly-portfolio"
+        ],
+        "production": [
+          "dilly-portfolio-custom"
+        ]
+      }
+    }
+  },
+  "etags": {}
+}
