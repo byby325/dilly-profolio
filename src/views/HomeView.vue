@@ -42,7 +42,7 @@
 
 <template>
   <div>
-    <div class="min-h-screen w-full py-16 md:py-32">
+    <div class="min-h-screen w-full py-16 md:py-32 bg-white">
       <div class="w-full px-4 md:px-8 lg:px-16">
         <!-- Hero Section -->
         <div class="w-full mx-auto space-y-8">
@@ -367,8 +367,8 @@
     <!-- Get in touch Section -->
     <section class="w-full bg-gray-50 py-8 sm:py-16">
       <div class="container mx-auto px-4 md:px-8 lg:px-16 text-center">
-        <h2 class="text-2xl md:text-3xl font-bold mb-6">Get in touch!</h2>
-        <p class="mb-8 text-md md:text-base">Say hi → byby325@gmail.com</p>
+        <h2 class="text-2xl md:text-3xl font-bold mb-6 text-primary-900">Get in touch!</h2>
+        <p class="mb-8 text-md md:text-base text-primary-800">Say hi → byby325@gmail.com</p>
         <div class="flex justify-center gap-6">
           <a
             href="https://www.linkedin.com/in/dilly-chen/"

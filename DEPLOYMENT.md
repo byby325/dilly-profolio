@@ -321,9 +321,7 @@ npm version major  # 1.1.0 -> 2.0.0
 cd dilly-profolio
 
 # 構建專案
-npm run build
-# 或如果 TypeScript 檢查失敗，使用：
-npx vite build
+npm run build || npx vite build
 ```
 
 #### 2. 部署到測試環境
@@ -416,3 +414,30 @@ npm run build || npx vite build
 
 # 部署到您自己的 Firebase 項目
 firebase deploy --project 您的項目ID 
+
+# 確認您在專案目錄中
+cd dilly-profolio
+
+# 將更改添加到暫存區
+git add .
+
+# 提交更改
+git commit -m "feat: 調整網站內容和版面" 
+
+# 如果您還沒有 develop 分支，先創建並切換到該分支
+git checkout -b develop
+
+# 如果 develop 分支已存在，確保您在該分支上
+git checkout develop
+
+# 推送到遠程倉庫
+git push origin develop 
+
+# 切換到 main 分支
+git checkout main 
+
+# 合併 develop 分支
+git merge develop 
+
+# 推送到 main 分支
+git push origin main 
