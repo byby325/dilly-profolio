@@ -6,10 +6,10 @@
     "dilly-portfolio": {
       "hosting": {
         "testing": [
-          "dilly-portfolio"
+          "dilly-portfolio-staging"
         ],
         "production": [
-          "dilly-portfolio-custom"
+          "dilly-portfolio"
         ]
       }
     }

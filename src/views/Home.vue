@@ -67,12 +67,12 @@
             >
               ABOUT <span class="ml-2">→</span>
             </RouterLink>
-            <a
-              href="#selected-projects"
+            <RouterLink
+              to="/"
               class="px-8 py-4 bg-gray-900 text-white rounded-md hover:bg-gray-800 transition-colors text-lg font-medium flex items-center"
             >
               PROJECT <span class="ml-2">→</span>
-            </a>
+            </RouterLink>
           </div>
           
           <!-- Scroll Down Animation Container -->

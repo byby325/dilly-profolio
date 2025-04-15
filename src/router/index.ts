@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import Home from '../views/Home.vue'
 
 // 解決 TypeScript 錯誤
 declare module 'vue-router' {
@@ -14,17 +14,17 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: HomeView,
+      component: Home,
     },
     {
       path: '/about',
       name: 'about',
-      component: () => import('../views/AboutView.vue'),
+      component: () => import('../views/About.vue'),
     },
     {
       path: '/resume',
       name: 'resume',
-      component: () => import('../views/ResumeView.vue'),
+      component: () => import('../views/Resume.vue'),
     },
   ],
 })
