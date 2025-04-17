@@ -520,7 +520,7 @@
 
       <!-- Besides Section -->
       <section class="w-full bg-gray-50">
-        <div class="container mx-auto px-4 md:px-8 lg:px-16 py-8">
+        <div class="container mx-auto px-4 md:px-8 lg:px-16 pt-8 pb-16">
           <h2 class="text-2xl md:text-3xl font-bold mb-8">Besides...</h2>
           <p class="text-gray-700 mb-8 text-md md:text-base max-w-4xl">
             經歷工程與設計的跨領域求學階段，培養了對視覺設計與科技應用的興趣，經常參與 UI / UX 設計社群、活動講座、工作坊，以及藝文展覽等。我喜歡透過參與社群建立人際關係，吸收不同設計師的心路歷程，從各個角度來學習設計思考、執行、驗證。
@@ -562,30 +562,6 @@
               class="rounded-lg w-full h-64 object-cover hover:scale-105 transition-transform"
               @error="handleImageError"
             />
-          </div>
-        </div>
-      </section>
-
-      <!-- Contact Section -->
-      <section class="w-full bg-gray-50 py-8 sm:py-16">
-        <div class="container mx-auto px-4 md:px-8 lg:px-16 text-center">
-          <h2 class="text-2xl md:text-3xl font-bold mb-6">Get in touch!</h2>
-          <p class="mb-8 text-md md:text-base">Say hi → byby325@gmail.com</p>
-          <div class="flex justify-center gap-6">
-            <a
-              href="https://www.linkedin.com/in/dilly-chen/"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="bg-gray-900 text-white rounded-full px-8 py-4 hover:bg-gray-800 transition-colors text-lg"
-            >
-              LINKEDIN
-            </a>
-            <a
-              href="#"
-              class="bg-gray-900 text-white rounded-full px-8 py-4 hover:bg-gray-800 transition-colors text-lg"
-            >
-              RESUME
-            </a>
           </div>
         </div>
       </section>

@@ -52,107 +52,136 @@
     </div>
 
     <!-- SELECTED PROJECT Section -->
-    <section id="selected-projects" class="w-full py-16 md:py-12">
-      <div class="w-full px-4 md:px-8 lg:px-16">
-        <h2 class="text-4xl md:text-5xl font-bold mb-12" :class="[isDarkMode ? 'text-white' : 'text-primary-900']">SELECTED PROJECT</h2>
+    <section id="selected-projects" class="w-full py-16 md:py-12 overflow-hidden">
+      <div class="w-full">
+        <!-- 跑馬燈標題 -->
+        <div class="relative marquee-container overflow-hidden">
+          <div class="marquee-content">
+            <span class="marquee-item text-5xl md:text-7xl font-bold text-white">SELECTED PROJECT→</span>
+            <span class="marquee-item text-5xl md:text-7xl font-bold text-white">SELECTED PROJECT→</span>
+            <span class="marquee-item text-5xl md:text-7xl font-bold text-white">SELECTED PROJECT→</span>
+            <span class="marquee-item text-5xl md:text-7xl font-bold text-white">SELECTED PROJECT→</span>
+            <span class="marquee-item text-5xl md:text-7xl font-bold text-white">SELECTED PROJECT→</span>
+            <span class="marquee-item text-5xl md:text-7xl font-bold text-white">SELECTED PROJECT→</span>
+            <span class="marquee-item text-5xl md:text-7xl font-bold text-white">SELECTED PROJECT→</span>
+            <span class="marquee-item text-5xl md:text-7xl font-bold text-white">SELECTED PROJECT→</span>
+            <span class="marquee-item text-5xl md:text-7xl font-bold text-white">SELECTED PROJECT→</span>
+            <span class="marquee-item text-5xl md:text-7xl font-bold text-white">SELECTED PROJECT→</span>
+          </div>
+          <!-- 重複的內容，確保無縫滾動 -->
+          <div class="marquee-content marquee-content-duplicate">
+            <span class="marquee-item text-5xl md:text-7xl font-bold text-white">SELECTED PROJECT→</span>
+            <span class="marquee-item text-5xl md:text-7xl font-bold text-white">SELECTED PROJECT→</span>
+            <span class="marquee-item text-5xl md:text-7xl font-bold text-white">SELECTED PROJECT→</span>
+            <span class="marquee-item text-5xl md:text-7xl font-bold text-white">SELECTED PROJECT→</span>
+            <span class="marquee-item text-5xl md:text-7xl font-bold text-white">SELECTED PROJECT→</span>
+            <span class="marquee-item text-5xl md:text-7xl font-bold text-white">SELECTED PROJECT→</span>
+            <span class="marquee-item text-5xl md:text-7xl font-bold text-white">SELECTED PROJECT→</span>
+            <span class="marquee-item text-5xl md:text-7xl font-bold text-white">SELECTED PROJECT→</span>
+            <span class="marquee-item text-5xl md:text-7xl font-bold text-white">SELECTED PROJECT→</span>
+            <span class="marquee-item text-5xl md:text-7xl font-bold text-white">SELECTED PROJECT→</span>
+          </div>
+        </div>
         
-        <div class="space-y-6 max-w-7xl mx-auto">
-          <!-- Project Card 1 -->
-          <div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow">
-            <div class="flex flex-col md:flex-row">
-              <div class="relative md:w-2/5 lg:w-1/3">
-                <img src="../assets/images/projects/project-1/cover/projectCover-moodzine.jpg" alt="Project 1" class="w-full aspect-video md:h-full object-cover">
-                <span class="absolute top-4 left-4 bg-gray-800 text-white text-xs font-semibold px-3 py-1 rounded-full">Mobile App Design</span>
-              </div>
-              <div class="p-6 md:p-8 md:w-3/5 lg:w-2/3">
-                <h3 class="text-2xl font-bold text-primary-900 mb-2">MOODZiNE</h3>
-                <p class="text-gray-600 mb-4">情緒管理 APP</p>
-                <div class="flex flex-wrap gap-2 mb-6">
-                  <span class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded">Emotional Management</span>
-                  <span class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded">UI/UX Design</span>
-                  <span class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded">Interview Research</span>
+        <div class="px-4 md:px-8 lg:px-16 mt-8">
+          <div class="space-y-6 max-w-7xl mx-auto">
+            <!-- Project Card 1 -->
+            <div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow">
+              <div class="flex flex-col md:flex-row">
+                <div class="relative md:w-2/5 lg:w-1/3">
+                  <img src="../assets/images/projects/project-1/cover/projectCover-moodzine.jpg" alt="Project 1" class="w-full aspect-video md:h-full object-cover">
+                  <span class="absolute top-4 left-4 bg-gray-800 text-white text-xs font-semibold px-3 py-1 rounded-full">Mobile App Design</span>
                 </div>
-                <p class="text-gray-700 mb-6">
-                  發覺自己的心理問題，才能從情緒的根本上解決問題。我們與諮商心理師、輕度憂鬱者進行個別訪談研究，並分析市場產品，將產品目的與定義釐清，規劃完整的 App 內容。透過視覺化符碼與遊戲化互動，鼓勵使用者每日紀錄情緒，了解自身變化及原因，就像創作專屬的情緒雜誌。
-                </p>
-                <a href="javascript:void(0)" class="text-primary-600 font-medium hover:text-primary-800 transition-colors inline-flex items-center">
-                  Coming Soon <span class="ml-1">→</span>
-                </a>
+                <div class="p-6 md:p-8 md:w-3/5 lg:w-2/3">
+                  <h3 class="text-2xl font-bold text-primary-900 mb-2">MOODZiNE</h3>
+                  <p class="text-gray-600 mb-4">情緒管理 APP</p>
+                  <div class="flex flex-wrap gap-2 mb-6">
+                    <span class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded">Emotional Management</span>
+                    <span class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded">UI/UX Design</span>
+                    <span class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded">Interview Research</span>
+                  </div>
+                  <p class="text-gray-700 mb-6">
+                    發覺自己的心理問題，才能從情緒的根本上解決問題。我們與諮商心理師、輕度憂鬱者進行個別訪談研究，並分析市場產品，將產品目的與定義釐清，規劃完整的 App 內容。透過視覺化符碼與遊戲化互動，鼓勵使用者每日紀錄情緒，了解自身變化及原因，就像創作專屬的情緒雜誌。
+                  </p>
+                  <a href="javascript:void(0)" class="text-primary-600 font-medium hover:text-primary-800 transition-colors inline-flex items-center">
+                    Coming Soon <span class="ml-1">→</span>
+                  </a>
+                </div>
               </div>
             </div>
-          </div>
-          
-          <!-- Project Card 2 -->
-          <div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow">
-            <div class="flex flex-col md:flex-row">
-              <div class="relative md:w-2/5 lg:w-1/3">
-                <img src="../assets/images/projects/project-2/cover/projectCover-firefoxLite.jpg" alt="Project 2" class="w-full aspect-video md:h-full object-cover">
-                <span class="absolute top-4 left-4 bg-gray-800 text-white text-xs font-semibold px-3 py-1 rounded-full">Browser Redesign</span>
-              </div>
-              <div class="p-6 md:p-8 md:w-3/5 lg:w-2/3">
-                <h3 class="text-2xl font-bold text-primary-900 mb-2">Firefox Lite Browser Feature</h3>
-                <p class="text-gray-600 mb-4">Reader Mode & Share Function</p>
-                <div class="flex flex-wrap gap-2 mb-6">
-                  <span class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded">Firefox Lite</span>
-                  <span class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded">UI/UX Design</span>
-                  <span class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded">How Might We</span>
+            
+            <!-- Project Card 2 -->
+            <div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow">
+              <div class="flex flex-col md:flex-row">
+                <div class="relative md:w-2/5 lg:w-1/3">
+                  <img src="../assets/images/projects/project-2/cover/projectCover-firefoxLite.jpg" alt="Project 2" class="w-full aspect-video md:h-full object-cover">
+                  <span class="absolute top-4 left-4 bg-gray-800 text-white text-xs font-semibold px-3 py-1 rounded-full">Browser Redesign</span>
                 </div>
-                <p class="text-gray-700 mb-6">
-                  本專案為 Mozilla Campus Seeding Program，以 Firefox Lite App 產品為例，透過訪談研究及 Empathy Mapping，了解使用者瀏覽行為與痛點。案例聚焦瀏覽器「閱讀模式」、「分享功能」，重新設計操作流程與版面配置，提升跨裝置的一致性與流暢度，拓展不同年齡層的使用者，讓輕量化瀏覽器擁有更舒適的閱讀與操作體驗。
-                </p>
-                <a href="javascript:void(0)" class="text-primary-600 font-medium hover:text-primary-800 transition-colors inline-flex items-center">
-                  Coming Soon <span class="ml-1">→</span>
-                </a>
+                <div class="p-6 md:p-8 md:w-3/5 lg:w-2/3">
+                  <h3 class="text-2xl font-bold text-primary-900 mb-2">Firefox Lite Browser Feature</h3>
+                  <p class="text-gray-600 mb-4">Reader Mode & Share Function</p>
+                  <div class="flex flex-wrap gap-2 mb-6">
+                    <span class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded">Firefox Lite</span>
+                    <span class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded">UI/UX Design</span>
+                    <span class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded">How Might We</span>
+                  </div>
+                  <p class="text-gray-700 mb-6">
+                    本專案為 Mozilla Campus Seeding Program，以 Firefox Lite App 產品為例，透過訪談研究及 Empathy Mapping，了解使用者瀏覽行為與痛點。案例聚焦瀏覽器「閱讀模式」、「分享功能」，重新設計操作流程與版面配置，提升跨裝置的一致性與流暢度，拓展不同年齡層的使用者，讓輕量化瀏覽器擁有更舒適的閱讀與操作體驗。
+                  </p>
+                  <a href="javascript:void(0)" class="text-primary-600 font-medium hover:text-primary-800 transition-colors inline-flex items-center">
+                    Coming Soon <span class="ml-1">→</span>
+                  </a>
+                </div>
               </div>
             </div>
-          </div>
-          
-          <!-- Project Card 3 -->
-          <div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow">
-            <div class="flex flex-col md:flex-row">
-              <div class="relative md:w-2/5 lg:w-1/3">
-                <img src="../assets/images/projects/project-3/cover/projectCover-iotion.jpg" alt="Project 3" class="w-full aspect-video md:h-full object-cover">
-                <span class="absolute top-4 left-4 bg-gray-800 text-white text-xs font-semibold px-3 py-1 rounded-full">Dating App</span>
-              </div>
-              <div class="p-6 md:p-8 md:w-3/5 lg:w-2/3">
-                <h3 class="text-2xl font-bold text-primary-900 mb-2">IOTION</h3>
-                <p class="text-gray-600 mb-4">交友 APP</p>
-                <div class="flex flex-wrap gap-2 mb-6">
-                  <span class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded">UI/UX Design</span>
-                  <span class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded">User Research</span>
-                  <span class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded">Usability Test</span>
+            
+            <!-- Project Card 3 -->
+            <div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow">
+              <div class="flex flex-col md:flex-row">
+                <div class="relative md:w-2/5 lg:w-1/3">
+                  <img src="../assets/images/projects/project-3/cover/projectCover-iotion.jpg" alt="Project 3" class="w-full aspect-video md:h-full object-cover">
+                  <span class="absolute top-4 left-4 bg-gray-800 text-white text-xs font-semibold px-3 py-1 rounded-full">Dating App</span>
                 </div>
-                <p class="text-gray-700 mb-6">
-                  專案以問卷調查、實際訪談來定義問題、深入探討網路交友的心理需求與互動行為，並透過競品分析來了解市場狀況與定位。期望解決用戶互動的網路社交問題，創造一個輕鬆自然的交友過程，且在最後透過使用性測試，來了解產品設計的價值與可行性。
-                </p>
-                <a href="javascript:void(0)" class="text-primary-600 font-medium hover:text-primary-800 transition-colors inline-flex items-center">
-                  Coming Soon <span class="ml-1">→</span>
-                </a>
+                <div class="p-6 md:p-8 md:w-3/5 lg:w-2/3">
+                  <h3 class="text-2xl font-bold text-primary-900 mb-2">IOTION</h3>
+                  <p class="text-gray-600 mb-4">交友 APP</p>
+                  <div class="flex flex-wrap gap-2 mb-6">
+                    <span class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded">UI/UX Design</span>
+                    <span class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded">User Research</span>
+                    <span class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded">Usability Test</span>
+                  </div>
+                  <p class="text-gray-700 mb-6">
+                    專案以問卷調查、實際訪談來定義問題、深入探討網路交友的心理需求與互動行為，並透過競品分析來了解市場狀況與定位。期望解決用戶互動的網路社交問題，創造一個輕鬆自然的交友過程，且在最後透過使用性測試，來了解產品設計的價值與可行性。
+                  </p>
+                  <a href="javascript:void(0)" class="text-primary-600 font-medium hover:text-primary-800 transition-colors inline-flex items-center">
+                    Coming Soon <span class="ml-1">→</span>
+                  </a>
+                </div>
               </div>
             </div>
-          </div>
-          
-          <!-- Project Card 4 -->
-          <div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow">
-            <div class="flex flex-col md:flex-row">
-              <div class="relative md:w-2/5 lg:w-1/3">
-                <img src="../assets/images/projects/project-4/cover/projectCover-blossom.jpg" alt="Project 4" class="w-full aspect-video md:h-full object-cover">
-                <span class="absolute top-4 left-4 bg-gray-800 text-white text-xs font-semibold px-3 py-1 rounded-full">Service Design</span>
-              </div>
-              <div class="p-6 md:p-8 md:w-3/5 lg:w-2/3">
-                <h3 class="text-2xl font-bold text-primary-900 mb-2">Blossom 智慧項鍊</h3>
-                <p class="text-gray-600 mb-4">穿戴式裝置 APP</p>
-                <div class="flex flex-wrap gap-2 mb-6">
-                  <span class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded">Service Design</span>
-                  <span class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded">UI Design</span>
-                  <span class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded">Interview Research</span>
+            
+            <!-- Project Card 4 -->
+            <div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow">
+              <div class="flex flex-col md:flex-row">
+                <div class="relative md:w-2/5 lg:w-1/3">
+                  <img src="../assets/images/projects/project-4/cover/projectCover-blossom.jpg" alt="Project 4" class="w-full aspect-video md:h-full object-cover">
+                  <span class="absolute top-4 left-4 bg-gray-800 text-white text-xs font-semibold px-3 py-1 rounded-full">Service Design</span>
                 </div>
-                <p class="text-gray-700 mb-6">
-                  專案為輔仁大學與苗圃設計思考工作坊，聚焦於高齡族群在日常生活中進行簡易復健的需求。藉由安養機構田野調查與長者與高齡者訪談，發想穿戴式智慧產品。透過簡單的動作引導與即時感測回饋，協助長者在日常中進行伸展運動，同時紀錄身體狀況，達到預防與改善健康的目標。
-                </p>
-                <a href="javascript:void(0)" class="text-primary-600 font-medium hover:text-primary-800 transition-colors inline-flex items-center">
-                  Coming Soon <span class="ml-1">→</span>
-                </a>
+                <div class="p-6 md:p-8 md:w-3/5 lg:w-2/3">
+                  <h3 class="text-2xl font-bold text-primary-900 mb-2">Blossom 智慧項鍊</h3>
+                  <p class="text-gray-600 mb-4">穿戴式裝置 APP</p>
+                  <div class="flex flex-wrap gap-2 mb-6">
+                    <span class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded">Service Design</span>
+                    <span class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded">UI Design</span>
+                    <span class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded">Interview Research</span>
+                  </div>
+                  <p class="text-gray-700 mb-6">
+                    專案為輔仁大學與苗圃設計思考工作坊，聚焦於高齡族群在日常生活中進行簡易復健的需求。藉由安養機構田野調查與長者與高齡者訪談，發想穿戴式智慧產品。透過簡單的動作引導與即時感測回饋，協助長者在日常中進行伸展運動，同時紀錄身體狀況，達到預防與改善健康的目標。
+                  </p>
+                  <a href="javascript:void(0)" class="text-primary-600 font-medium hover:text-primary-800 transition-colors inline-flex items-center">
+                    Coming Soon <span class="ml-1">→</span>
+                  </a>
+                </div>
               </div>
             </div>
           </div>
@@ -163,7 +192,13 @@
     <!-- UI Design Section -->
     <section class="w-full py-16 md:py-12">
       <div class="w-full px-4 md:px-8 lg:px-16">
-        <h2 class="text-4xl md:text-5xl font-bold mb-12" :class="[isDarkMode ? 'text-white' : 'text-primary-900']">UI DESIGN</h2>
+        <div class="flex flex-col items-center mb-12">
+          <div class="inline-flex items-center">
+            <div class="w-10 h-0.5 bg-accent-500 mr-4"></div>
+            <h2 class="text-3xl md:text-4xl font-bold text-center" :class="[isDarkMode ? 'text-white' : 'text-primary-900']">UI DESIGN</h2>
+            <div class="w-10 h-0.5 bg-accent-500 ml-4"></div>
+          </div>
+        </div>
         
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
           <!-- Reserve UI Design -->
@@ -273,7 +308,13 @@
     <!-- Visual Design Section -->
     <section class="w-full py-16 md:py-12">
       <div class="w-full px-4 md:px-8 lg:px-16">
-        <h2 class="text-4xl md:text-5xl font-bold mb-12" :class="[isDarkMode ? 'text-white' : 'text-primary-900']">VISUAL DESIGN</h2>
+        <div class="flex flex-col items-center mb-12">
+          <div class="inline-flex items-center">
+            <div class="w-10 h-0.5 bg-accent-500 mr-4"></div>
+            <h2 class="text-3xl md:text-4xl font-bold text-center" :class="[isDarkMode ? 'text-white' : 'text-primary-900']">VISUAL DESIGN</h2>
+            <div class="w-10 h-0.5 bg-accent-500 ml-4"></div>
+          </div>
+        </div>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
           <!-- Visual Design Items - Images commented out to fix build -->
           <div class="group relative overflow-hidden rounded-sm">
@@ -312,7 +353,13 @@
     <!-- Photography Section -->
     <section class="w-full py-16 md:py-12">
       <div class="w-full px-4 md:px-8 lg:px-16">
-        <h2 class="text-4xl md:text-5xl font-bold mb-12" :class="[isDarkMode ? 'text-white' : 'text-primary-900']">PHOTOGRAPHY</h2>
+        <div class="flex flex-col items-center mb-12">
+          <div class="inline-flex items-center">
+            <div class="w-10 h-0.5 bg-accent-500 mr-4"></div>
+            <h2 class="text-3xl md:text-4xl font-bold text-center" :class="[isDarkMode ? 'text-white' : 'text-primary-900']">PHOTOGRAPHY</h2>
+            <div class="w-10 h-0.5 bg-accent-500 ml-4"></div>
+          </div>
+        </div>
         
         <div class="grid grid-cols-1 md:grid-cols-4 max-w-6xl mx-auto">
           <!-- 第一行：01, 02 + 第二行的兩張 -->
@@ -361,7 +408,28 @@
     <!-- INSPIRATION→IDEATION→IMPLEMENTATION Section -->
     <section class="w-full py-16 md:py-24 overflow-hidden" :class="[isDarkMode ? 'bg-transparent' : 'bg-white']">
       <div class="w-full px-4 md:px-8 lg:px-16">
-        <h2 class="text-4xl md:text-5xl font-bold mb-6" :class="[isDarkMode ? 'text-white' : 'text-primary-900']">INSPIRATION→IDEATION→IMPLEMENTATION</h2>
+        <!-- 標題跑馬燈 -->
+        <div class="relative inspiration-title-marquee overflow-hidden mb-6 h-16 md:h-20">
+          <div class="inspiration-title absolute whitespace-nowrap">
+            <span class="text-4xl md:text-5xl font-bold" :class="[isDarkMode ? 'text-white' : 'text-primary-900']">INSPIRATION→</span>
+            <span class="text-4xl md:text-5xl font-bold" :class="[isDarkMode ? 'text-white' : 'text-primary-900']">IDEATION→</span>
+            <span class="text-4xl md:text-5xl font-bold" :class="[isDarkMode ? 'text-white' : 'text-primary-900']">IMPLEMENTATION→</span>
+            <span class="text-4xl md:text-5xl font-bold" :class="[isDarkMode ? 'text-white' : 'text-primary-900']">INSPIRATION→</span>
+            <span class="text-4xl md:text-5xl font-bold" :class="[isDarkMode ? 'text-white' : 'text-primary-900']">IDEATION→</span>
+            <span class="text-4xl md:text-5xl font-bold" :class="[isDarkMode ? 'text-white' : 'text-primary-900']">IMPLEMENTATION→</span>
+            <span class="text-4xl md:text-5xl font-bold" :class="[isDarkMode ? 'text-white' : 'text-primary-900']">INSPIRATION→</span>
+            <span class="text-4xl md:text-5xl font-bold" :class="[isDarkMode ? 'text-white' : 'text-primary-900']">IDEATION→</span>
+            <span class="text-4xl md:text-5xl font-bold" :class="[isDarkMode ? 'text-white' : 'text-primary-900']">IMPLEMENTATION→</span>
+            <span class="text-4xl md:text-5xl font-bold" :class="[isDarkMode ? 'text-white' : 'text-primary-900']">INSPIRATION→</span>
+            <span class="text-4xl md:text-5xl font-bold" :class="[isDarkMode ? 'text-white' : 'text-primary-900']">IDEATION→</span>
+            <span class="text-4xl md:text-5xl font-bold" :class="[isDarkMode ? 'text-white' : 'text-primary-900']">IMPLEMENTATION→</span>
+            <span class="text-4xl md:text-5xl font-bold" :class="[isDarkMode ? 'text-white' : 'text-primary-900']">INSPIRATION→</span>
+            <span class="text-4xl md:text-5xl font-bold" :class="[isDarkMode ? 'text-white' : 'text-primary-900']">IDEATION→</span>
+            <span class="text-4xl md:text-5xl font-bold" :class="[isDarkMode ? 'text-white' : 'text-primary-900']">IMPLEMENTATION→</span>
+          </div>
+          <!-- 隱藏的標題元素用於保留原有的互動功能 -->
+          <h2 id="inspiration-heading" class="sr-only text-3xl md:text-4xl font-bold" :class="[isDarkMode ? 'text-white' : 'text-primary-900']">INSPIRATION→IDEATION→IMPLEMENTATION</h2>
+        </div>
         
         <!-- Horizontal Scrolling Container -->
         <div id="horizontalScroll" class="relative mt-12 mb-16">
@@ -511,14 +579,9 @@
     // 獲取重要的節點
     const selectedProjectsSection = document.getElementById('selected-projects');
     const scrollContainer = document.getElementById('horizontalScroll');
-    let inspirationTitle: Element | null = null;
+    let inspirationTitle: Element | null = document.getElementById('inspiration-heading');
     
-    // 查找包含 "INSPIRATION" 的標題
-    document.querySelectorAll('section h2').forEach(h2 => {
-      if (h2.textContent?.includes('INSPIRATION')) {
-        inspirationTitle = h2;
-      }
-    });
+    // 不再需要查找包含 "INSPIRATION" 的標題，因為我們已經添加了 id
     
     // 處理水平滾動邏輯
     if (scrollContainer && inspirationTitle) {
@@ -597,5 +660,98 @@
 /* 背景顏色過渡效果 */
 .bg-transition {
   transition: background-color 0.5s ease;
+}
+
+/* SELECTED PROJECT 跑馬燈樣式 */
+.marquee-container {
+  width: 100%;
+  height: 110px;
+  overflow: hidden;
+  position: relative;
+}
+
+.marquee-content {
+  display: flex;
+  position: absolute;
+  left: 0;
+  top: 0;
+  animation: selected-marquee 60s linear infinite;
+  white-space: nowrap;
+}
+
+.marquee-content-duplicate {
+  animation-delay: -30s;
+}
+
+.marquee-item {
+  text-transform: uppercase;
+}
+
+@keyframes selected-marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+/* INSPIRATION 標題跑馬燈樣式 */
+.inspiration-title-marquee {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.inspiration-title {
+  display: flex;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  animation: inspiration-marquee 30s linear infinite;
+}
+
+.inspiration-title.marquee-content-duplicate {
+  animation-delay: -15s;
+}
+
+@keyframes inspiration-marquee {
+  0% {
+    transform: translateX(0%) translateY(-50%);
+  }
+  100% {
+    transform: translateX(-100%) translateY(-50%);
+  }
+}
+
+@media (max-width: 1024px) {
+  .marquee-item {
+    font-size: 4rem;
+  }
+  
+  .marquee-container {
+    height: 90px;
+  }
+}
+
+@media (max-width: 768px) {
+  .marquee-item {
+    font-size: 3rem;
+  }
+  
+  .marquee-container {
+    height: 70px;
+  }
+}
+
+@media (max-width: 480px) {
+  .marquee-item {
+    font-size: 2rem;
+  }
+  
+  .marquee-container {
+    height: 50px;
+  }
 }
 </style>
