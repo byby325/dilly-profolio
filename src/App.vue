@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
 import { ref } from 'vue'
+import Footer from './components/Footer.vue'
 
 // 控制移動端選單是否展開
 const mobileMenuOpen = ref(false)
@@ -59,8 +60,8 @@ const handleImageError = (event: Event) => {
         <!-- Mobile Navigation Button -->
         <button 
           class="md:hidden text-primary-700 p-2" 
-          @click="toggleMobileMenu"
           aria-label="Toggle menu"
+          @click="toggleMobileMenu"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -116,6 +117,9 @@ const handleImageError = (event: Event) => {
     <main class="flex-1 w-full">
       <RouterView />
     </main>
+
+    <!-- Footer -->
+    <Footer />
   </div>
 </template>
 

@@ -1,74 +1,24 @@
-<script setup lang="ts">
-  import { RouterLink } from 'vue-router'
-  import { ref, onMounted } from 'vue'
-  import LottieAnimation from '../components/LottieAnimation.vue'
-  
-  // 使用響應式參考來操作動畫
-  const arrowDownRef = ref(null)
-  
-  // 導航到首頁（不保留錨點）
-  const goToHome = () => {
-    // 獲取當前 URL 的協議和主機部分
-    const baseUrl = window.location.protocol + '//' + window.location.host;
-    // 設置完整的 URL，不包含任何路徑和錨點
-    window.location.href = baseUrl;
-  };
-  
-  // 設置水平滾動效果
-  const setupHorizontalScroll = () => {
-    const scrollContainer = document.getElementById('horizontalScroll');
-    if (!scrollContainer) return;
-    
-    const scrollContent = scrollContainer.querySelector('.flex') as HTMLElement;
-    if (!scrollContent) return;
-    
-    const maxScroll = scrollContent.scrollWidth - scrollContainer.clientWidth;
-    
-    // 監聽頁面滾動
-    window.addEventListener('scroll', () => {
-      const containerRect = scrollContainer.getBoundingClientRect();
-      const windowHeight = window.innerHeight;
-      
-      // 當容器進入視窗範圍
-      if (containerRect.top < windowHeight && containerRect.bottom > 0) {
-        // 計算滾動百分比
-        const visibleHeight = Math.min(windowHeight, containerRect.bottom) - 
-                             Math.max(0, containerRect.top);
-        const percentVisible = visibleHeight / containerRect.height;
-        const scrollOffset = maxScroll * Math.min(percentVisible * 1.5, 1);
-        
-        // 應用水平捲動
-        scrollContent.style.transform = `translateX(-${scrollOffset}px)`;
-      }
-    });
-  };
-  
-  onMounted(() => {
-    setupHorizontalScroll();
-  });
-</script>
-
 <template>
-  <div>
-    <div class="min-h-screen w-full py-16 md:py-32 bg-white">
+  <div :class="{'bg-transition': true}" :style="{ backgroundColor: backgroundColor }">
+    <div class="w-full py-16 md:py-32">
       <div class="w-full px-4 md:px-8 lg:px-16">
         <!-- Hero Section -->
-        <div class="w-full mx-auto space-y-8">
+        <div class="w-full mx-auto">
           <!-- Main Content -->
           <div class="space-y-8">
             <!-- Heading -->
-            <h1 class="text-5xl md:text-7xl lg:text-8xl font-bold text-primary-900 leading-tight">
+            <h1 class="text-5xl md:text-7xl lg:text-8xl font-bold" :class="[isDarkMode ? 'text-white' : 'text-primary-900']">
               Hello! I'm Dilly Chen.
             </h1>
             
             <!-- Subheading -->
-            <p class="text-3xl md:text-4xl lg:text-5xl text-primary-700 leading-relaxed tracking-wide">
+            <p class="text-3xl md:text-4xl lg:text-5xl leading-relaxed tracking-wide" :class="[isDarkMode ? 'text-gray-200' : 'text-primary-700']">
               I'm a Product Designer, crafting end-to-end solutions that balance business goals and user needs, creating meaningful product experiences.
             </p>
           </div>
 
           <!-- CTA Buttons -->
-          <div class="flex flex-wrap gap-6">
+          <div class="flex flex-wrap gap-6 mt-10">
             <RouterLink
               to="/about"
               class="px-8 py-4 bg-gray-900 text-white rounded-md hover:bg-gray-800 transition-colors text-lg font-medium flex items-center"
@@ -76,15 +26,15 @@
               ABOUT <span class="ml-2 text-white">→</span>
             </RouterLink>
             <button
-              @click="goToHome"
               class="px-8 py-4 bg-gray-900 text-white rounded-md hover:bg-gray-800 transition-colors text-lg font-medium flex items-center"
+              @click="goToHome"
             >
               PROJECT <span class="ml-2 text-white">→</span>
             </button>
           </div>
           
           <!-- Scroll Down Animation Container -->
-          <div class="flex justify-center mb-10">
+          <div class="flex justify-center my-10">
             <div class="w-16 h-16">
               <LottieAnimation
                 ref="arrowDownRef"
@@ -93,7 +43,7 @@
                 :loop="true"
                 :autoplay="true"
                 :speed="1"
-                color="#18181b"
+                :color="isDarkMode ? '#ffffff' : '#18181b'"
               />
             </div>
           </div>
@@ -102,11 +52,11 @@
     </div>
 
     <!-- SELECTED PROJECT Section -->
-    <section id="selected-projects" class="w-full py-16 md:py-24 bg-white">
+    <section id="selected-projects" class="w-full py-16 md:py-12">
       <div class="w-full px-4 md:px-8 lg:px-16">
-        <h2 class="text-4xl md:text-5xl font-bold text-primary-900 mb-12">SELECTED PROJECT</h2>
+        <h2 class="text-4xl md:text-5xl font-bold mb-12" :class="[isDarkMode ? 'text-white' : 'text-primary-900']">SELECTED PROJECT</h2>
         
-        <div class="space-y-12 max-w-5xl mx-auto">
+        <div class="space-y-6 max-w-7xl mx-auto">
           <!-- Project Card 1 -->
           <div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow">
             <div class="flex flex-col md:flex-row">
@@ -211,91 +161,148 @@
     </section>
     
     <!-- UI Design Section -->
-    <section class="w-full py-16 md:py-24 bg-gray-50 hidden">
+    <section class="w-full py-16 md:py-12">
       <div class="w-full px-4 md:px-8 lg:px-16">
-        <h2 class="text-4xl md:text-5xl font-bold text-primary-900 mb-12">UI DESIGN</h2>
+        <h2 class="text-4xl md:text-5xl font-bold mb-12" :class="[isDarkMode ? 'text-white' : 'text-primary-900']">UI DESIGN</h2>
         
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <!-- UI Design Items - Images commented out to fix build -->
-          <div class="group relative overflow-hidden rounded-lg">
-            <!-- <img src="../assets/ui-design-1.jpg" alt="UI Design 1" class="w-full aspect-[4/3] object-cover transition-transform duration-300 group-hover:scale-105"> -->
-            <div class="absolute bottom-0 left-0 w-full p-4 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-              <h3 class="text-white text-lg font-medium">Mobile App Dashboard</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <!-- Reserve UI Design -->
+          <div class="rounded-sm group relative overflow-hidden hover:shadow-xl transition-all cursor-pointer aspect-[3/2]" @click="showUIDetails('reserve')">
+            <img 
+              :src="getImagePath('ui-reserve01')" 
+              alt="Online Reservation"
+              class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+              @error="handleImageError"
+            >
+            <div class="fallback absolute inset-0">
+              <UiPlaceholder title="Online Reservation" subtitle="Restaurant Reservation" />
+            </div>
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end items-center p-6 z-10">
+              <h3 class="text-white text-xl">Online Reservation</h3>
             </div>
           </div>
           
-          <div class="group relative overflow-hidden rounded-lg">
-            <!-- <img src="../assets/ui-design-2.jpg" alt="UI Design 2" class="w-full aspect-[4/3] object-cover transition-transform duration-300 group-hover:scale-105"> -->
-            <div class="absolute bottom-0 left-0 w-full p-4 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-              <h3 class="text-white text-lg font-medium">E-commerce Product Page</h3>
+          <!-- Pomodoro UI Design -->
+          <div class="rounded-sm group relative overflow-hidden hover:shadow-xl transition-all cursor-pointer aspect-[3/2]" @click="showUIDetails('pomodoro')">
+            <!-- cspell:disable-next-line -->
+            <img 
+              :src="getImagePath('ui-pomodoro01')" 
+              alt="Pomodoro Timer" 
+              class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+              @error="handleImageError"
+            >
+            <div class="fallback absolute inset-0">
+              <UiPlaceholder title="Pomodoro Timer" subtitle="Pomodoro Timer" />
+            </div>
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end items-center p-6 z-10">
+              <h3 class="text-white text-xl">Pomodoro Timer</h3>
             </div>
           </div>
           
-          <div class="group relative overflow-hidden rounded-lg">
-            <!-- <img src="../assets/ui-design-3.jpg" alt="UI Design 3" class="w-full aspect-[4/3] object-cover transition-transform duration-300 group-hover:scale-105"> -->
-            <div class="absolute bottom-0 left-0 w-full p-4 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-              <h3 class="text-white text-lg font-medium">Banking App Interface</h3>
+          <!-- Coffee UI Design -->
+          <div class="rounded-sm group relative overflow-hidden hover:shadow-xl transition-all cursor-pointer aspect-[3/2]" @click="showUIDetails('coffee')">
+            <img 
+              :src="getImagePath('ui-coffee01')" 
+              alt="Website Design" 
+              class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+              @error="handleImageError"
+            >
+            <div class="fallback absolute inset-0">
+              <UiPlaceholder title="Website Design" subtitle="Coffee Shop App" />
+            </div>
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end items-center p-6 z-10">
+              <h3 class="text-white text-xl">Website Design</h3>
             </div>
           </div>
           
-          <div class="group relative overflow-hidden rounded-lg">
-            <!-- <img src="../assets/ui-design-4.jpg" alt="UI Design 4" class="w-full aspect-[4/3] object-cover transition-transform duration-300 group-hover:scale-105"> -->
-            <div class="absolute bottom-0 left-0 w-full p-4 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-              <h3 class="text-white text-lg font-medium">Admin Dashboard</h3>
+          <!-- Payment UI Design -->
+          <div class="rounded-sm group relative overflow-hidden hover:shadow-xl transition-all cursor-pointer aspect-[3/2]" @click="showUIDetails('payment')">
+            <img 
+              :src="getImagePath('ui-payment01')" 
+              alt="Online Payment"
+              class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+              @error="handleImageError"
+            >
+            <div class="fallback absolute inset-0">
+              <UiPlaceholder title="Online Payment" subtitle="Mobile Payment UI" />
             </div>
-          </div>
-          
-          <div class="group relative overflow-hidden rounded-lg">
-            <!-- <img src="../assets/ui-design-5.jpg" alt="UI Design 5" class="w-full aspect-[4/3] object-cover transition-transform duration-300 group-hover:scale-105"> -->
-            <div class="absolute bottom-0 left-0 w-full p-4 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-              <h3 class="text-white text-lg font-medium">Smart Home App</h3>
-            </div>
-          </div>
-          
-          <div class="group relative overflow-hidden rounded-lg">
-            <!-- <img src="../assets/ui-design-6.jpg" alt="UI Design 6" class="w-full aspect-[4/3] object-cover transition-transform duration-300 group-hover:scale-105"> -->
-            <div class="absolute bottom-0 left-0 w-full p-4 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-              <h3 class="text-white text-lg font-medium">Travel App Interface</h3>
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end items-center p-6 z-10">
+              <h3 class="text-white text-xl">Online Payment</h3>
             </div>
           </div>
         </div>
       </div>
     </section>
     
-    <!-- Visual Design Section -->
-    <section class="w-full py-16 md:py-24 bg-white hidden">
-      <div class="w-full px-4 md:px-8 lg:px-16">
-        <h2 class="text-4xl md:text-5xl font-bold text-primary-900 mb-12">VISUAL DESIGN</h2>
+    <!-- UI Detail Modal -->
+    <div v-if="showDetailsModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70" @click.self="closeModal">
+      <div class="bg-white rounded-lg w-full max-w-6xl max-h-[90vh] overflow-auto">
+        <!-- Modal Header -->
+        <div class="p-6 border-b border-gray-200 flex justify-between items-center sticky top-0 bg-white z-10">
+          <h3 class="text-2xl font-bold text-primary-900">{{ currentDesign.name }}</h3>
+          <button class="text-gray-500 hover:text-gray-700 focus:outline-none" @click="closeModal">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
         
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Modal Body -->
+        <div class="p-6">
+          <!-- Description -->
+          <p v-if="currentDesign.description" class="text-primary-800 mb-8">{{ currentDesign.description }}</p>
+          
+          <!-- Images Gallery -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div v-for="(image, index) in currentDesign.images" :key="index" class="rounded-sm aspect-[3/2] relative">
+              <img 
+                :src="getImagePath(image)" 
+                :alt="`${currentDesign.name} - 畫面 ${index + 1}`" 
+                class="w-full h-full object-cover"
+                @error="handleImageError"
+              >
+              <div class="fallback absolute inset-0">
+                <UiPlaceholder :title="currentDesign.name" :subtitle="`Screen ${index + 1}`" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Visual Design Section -->
+    <section class="w-full py-16 md:py-12">
+      <div class="w-full px-4 md:px-8 lg:px-16">
+        <h2 class="text-4xl md:text-5xl font-bold mb-12" :class="[isDarkMode ? 'text-white' : 'text-primary-900']">VISUAL DESIGN</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
           <!-- Visual Design Items - Images commented out to fix build -->
-          <div class="group relative overflow-hidden rounded-lg">
-            <!-- <img src="../assets/visual-design-1.jpg" alt="Visual Design 1" class="w-full aspect-[4/3] object-cover transition-all duration-300 group-hover:brightness-110"> -->
+          <div class="group relative overflow-hidden rounded-sm">
+            <img src="../assets/images/visual-design/visual01.jpg" alt="Visual Design 1" class="w-full aspect-[4/3] object-cover transition-all duration-300 group-hover:brightness-110">
             <div class="absolute inset-0 bg-primary-900/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
           </div>
           
-          <div class="group relative overflow-hidden rounded-lg">
-            <!-- <img src="../assets/visual-design-2.jpg" alt="Visual Design 2" class="w-full aspect-[4/3] object-cover transition-all duration-300 group-hover:brightness-110"> -->
+          <div class="group relative overflow-hidden rounded-sm">
+            <img src="../assets/images/visual-design/visual02.jpg" alt="Visual Design 1" class="w-full aspect-[4/3] object-cover transition-all duration-300 group-hover:brightness-110">
             <div class="absolute inset-0 bg-primary-900/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
           </div>
           
-          <div class="group relative overflow-hidden rounded-lg">
-            <!-- <img src="../assets/visual-design-3.jpg" alt="Visual Design 3" class="w-full aspect-[4/3] object-cover transition-all duration-300 group-hover:brightness-110"> -->
+          <div class="group relative overflow-hidden rounded-sm">
+            <img src="../assets/images/visual-design/visual03.jpg" alt="Visual Design 1" class="w-full aspect-[4/3] object-cover transition-all duration-300 group-hover:brightness-110">
             <div class="absolute inset-0 bg-primary-900/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
           </div>
           
-          <div class="group relative overflow-hidden rounded-lg">
-            <!-- <img src="../assets/visual-design-4.jpg" alt="Visual Design 4" class="w-full aspect-[4/3] object-cover transition-all duration-300 group-hover:brightness-110"> -->
+          <div class="group relative overflow-hidden rounded-sm">
+            <img src="../assets/images/visual-design/visual04.jpg" alt="Visual Design 1" class="w-full aspect-[4/3] object-cover transition-all duration-300 group-hover:brightness-110">
             <div class="absolute inset-0 bg-primary-900/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
           </div>
           
-          <div class="group relative overflow-hidden rounded-lg">
-            <!-- <img src="../assets/visual-design-5.jpg" alt="Visual Design 5" class="w-full aspect-[4/3] object-cover transition-all duration-300 group-hover:brightness-110"> -->
+          <div class="group relative overflow-hidden rounded-sm">
+            <img src="../assets/images/visual-design/visual05.jpg" alt="Visual Design 1" class="w-full aspect-[4/3] object-cover transition-all duration-300 group-hover:brightness-110">
             <div class="absolute inset-0 bg-primary-900/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
           </div>
           
-          <div class="group relative overflow-hidden rounded-lg">
-            <!-- <img src="../assets/visual-design-6.jpg" alt="Visual Design 6" class="w-full aspect-[4/3] object-cover transition-all duration-300 group-hover:brightness-110"> -->
+          <div class="group relative overflow-hidden rounded-sm">
+            <img src="../assets/images/visual-design/visual06.jpg" alt="Visual Design 1" class="w-full aspect-[4/3] object-cover transition-all duration-300 group-hover:brightness-110">
             <div class="absolute inset-0 bg-primary-900/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
           </div>
         </div>
@@ -303,61 +310,79 @@
     </section>
     
     <!-- Photography Section -->
-    <section class="w-full py-16 md:py-24 bg-gray-50 hidden">
+    <section class="w-full py-16 md:py-12">
       <div class="w-full px-4 md:px-8 lg:px-16">
-        <h2 class="text-4xl md:text-5xl font-bold text-primary-900 mb-12">PHOTOGRAPHY</h2>
+        <h2 class="text-4xl md:text-5xl font-bold mb-12" :class="[isDarkMode ? 'text-white' : 'text-primary-900']">PHOTOGRAPHY</h2>
         
-        <div class="grid grid-cols-1 md:grid-cols-6 gap-4">
-          <!-- Photography Items - Images commented out to fix build -->
-          <div class="md:col-span-3 relative overflow-hidden rounded-lg">
-            <!-- <img src="../assets/photo-1.jpg" alt="Photography 1" class="w-full aspect-video object-cover transition-all duration-500 hover:scale-105"> -->
+        <div class="grid grid-cols-1 md:grid-cols-4 max-w-6xl mx-auto">
+          <!-- 第一行：01, 02 + 第二行的兩張 -->
+          <div class="relative overflow-hidden">
+            <div class="aspect-[4/3]">
+              <img src="../assets/images/photography/photography01.jpg" alt="Photography 01" class="w-full h-full object-cover transition-all duration-500 hover:scale-105">
+            </div>
           </div>
           
-          <div class="md:col-span-3 relative overflow-hidden rounded-lg">
-            <!-- <img src="../assets/photo-2.jpg" alt="Photography 2" class="w-full aspect-video object-cover transition-all duration-500 hover:scale-105"> -->
+          <div class="relative overflow-hidden">
+            <div class="aspect-[4/3]">
+              <img src="../assets/images/photography/photography02.jpg" alt="Photography 02" class="w-full h-full object-cover transition-all duration-500 hover:scale-105">
+            </div>
           </div>
           
-          <div class="md:col-span-2 relative overflow-hidden rounded-lg">
-            <!-- <img src="../assets/photo-3.jpg" alt="Photography 3" class="w-full aspect-[9/16] object-cover transition-all duration-500 hover:scale-105"> -->
+          <!-- photography05 使用 3和7 的格子 -->
+          <div class="relative overflow-hidden md:row-span-2 flex items-center">
+            <div class="aspect-[4/3] md:h-auto md:aspect-auto w-full">
+              <img src="../assets/images/photography/photography05.jpg" alt="Photography 05" class="w-full h-full object-cover transition-all duration-500 hover:scale-105">
+            </div>
           </div>
           
-          <div class="md:col-span-4 relative overflow-hidden rounded-lg">
-            <!-- <img src="../assets/photo-4.jpg" alt="Photography 4" class="w-full aspect-video object-cover transition-all duration-500 hover:scale-105"> -->
+          <!-- photography06 使用 4和8 的格子 -->
+          <div class="relative overflow-hidden md:row-span-2 flex items-center">
+            <div class="aspect-[4/3] md:h-auto md:aspect-auto w-full">
+              <img src="../assets/images/photography/photography06.jpg" alt="Photography 06" class="w-full h-full object-cover transition-all duration-500 hover:scale-105">
+            </div>
           </div>
           
-          <div class="md:col-span-4 relative overflow-hidden rounded-lg">
-            <!-- <img src="../assets/photo-5.jpg" alt="Photography 5" class="w-full aspect-video object-cover transition-all duration-500 hover:scale-105"> -->
+          <!-- 第二行的前兩張：03, 04 -->
+          <div class="relative overflow-hidden">
+            <div class="aspect-[4/3]">
+              <img src="../assets/images/photography/photography03.jpg" alt="Photography 03" class="w-full h-full object-cover transition-all duration-500 hover:scale-105">
+            </div>
           </div>
           
-          <div class="md:col-span-2 relative overflow-hidden rounded-lg">
-            <!-- <img src="../assets/photo-6.jpg" alt="Photography 6" class="w-full aspect-[9/16] object-cover transition-all duration-500 hover:scale-105"> -->
+          <div class="relative overflow-hidden">
+            <div class="aspect-[4/3]">
+              <img src="../assets/images/photography/photography04.jpg" alt="Photography 04" class="w-full h-full object-cover transition-all duration-500 hover:scale-105">
+            </div>
           </div>
         </div>
       </div>
     </section>
     
     <!-- INSPIRATION→IDEATION→IMPLEMENTATION Section -->
-    <section class="w-full py-16 md:py-24 bg-white overflow-hidden hidden">
+    <section class="w-full py-16 md:py-24 overflow-hidden" :class="[isDarkMode ? 'bg-transparent' : 'bg-white']">
       <div class="w-full px-4 md:px-8 lg:px-16">
-        <h2 class="text-4xl md:text-5xl font-bold text-primary-900 mb-6">INSPIRATION→IDEATION→IMPLEMENTATION</h2>
+        <h2 class="text-4xl md:text-5xl font-bold mb-6" :class="[isDarkMode ? 'text-white' : 'text-primary-900']">INSPIRATION→IDEATION→IMPLEMENTATION</h2>
         
         <!-- Horizontal Scrolling Container -->
         <div id="horizontalScroll" class="relative mt-12 mb-16">
-          <div class="flex space-x-8 py-4 w-max">
+          <div class="flex space-x-4 py-4 w-max">
             <div class="w-[500px] flex-shrink-0">
-              <!-- <img src="../assets/design-process-1.jpg" alt="Inspiration" class="w-full h-[300px] object-cover rounded-lg shadow-md"> -->
+              <img src="../assets/images/inspiration/inspiration01.jpg" alt="Inspiration" class="w-full h-[240px] object-cover">
             </div>
             <div class="w-[500px] flex-shrink-0">
-              <!-- <img src="../assets/design-process-2.jpg" alt="Research" class="w-full h-[300px] object-cover rounded-lg shadow-md"> -->
+              <img src="../assets/images/inspiration/inspiration02.jpg" alt="Inspiration" class="w-full h-[240px] object-cover">
             </div>
             <div class="w-[500px] flex-shrink-0">
-              <!-- <img src="../assets/design-process-3.jpg" alt="Ideation" class="w-full h-[300px] object-cover rounded-lg shadow-md"> -->
+              <img src="../assets/images/inspiration/inspiration03.jpg" alt="Inspiration" class="w-full h-[240px] object-cover">
             </div>
             <div class="w-[500px] flex-shrink-0">
-              <!-- <img src="../assets/design-process-4.jpg" alt="Prototyping" class="w-full h-[300px] object-cover rounded-lg shadow-md"> -->
+              <img src="../assets/images/inspiration/inspiration04.jpg" alt="Inspiration" class="w-full h-[240px] object-cover">
             </div>
             <div class="w-[500px] flex-shrink-0">
-              <!-- <img src="../assets/design-process-5.jpg" alt="Implementation" class="w-full h-[300px] object-cover rounded-lg shadow-md"> -->
+              <img src="../assets/images/inspiration/inspiration05.jpg" alt="Inspiration" class="w-full h-[240px] object-cover">
+            </div>
+            <div class="w-[500px] flex-shrink-0">
+              <img src="../assets/images/inspiration/inspiration06.jpg" alt="Inspiration" class="w-full h-[240px] object-cover">
             </div>
           </div>
         </div>
@@ -371,55 +396,206 @@
         </div>
       </div>
     </section>
-    
-    <!-- Get in touch Section -->
-    <section class="w-full bg-gray-50 py-8 sm:py-16">
-      <div class="container mx-auto px-4 md:px-8 lg:px-16 text-center">
-        <h2 class="text-2xl md:text-3xl font-bold mb-6 text-primary-900">Get in touch!</h2>
-        <p class="mb-8 text-md md:text-base text-primary-800">Say hi → byby325@gmail.com</p>
-        <div class="flex justify-center gap-6">
-          <a
-            href="https://www.linkedin.com/in/dilly-chen/"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="bg-gray-900 text-white rounded-full px-8 py-4 hover:bg-gray-800 transition-colors text-lg"
-          >
-            LINKEDIN
-          </a>
-          <a
-            href="#"
-            class="bg-gray-900 text-white rounded-full px-8 py-4 hover:bg-gray-800 transition-colors text-lg"
-          >
-            RESUME
-          </a>
-        </div>
-      </div>
-    </section>
   </div>
 </template>
 
+<script setup lang="ts">
+  // cspell:words pomodoro
+  import { RouterLink } from 'vue-router'
+  import { ref, onMounted, computed } from 'vue'
+  import LottieAnimation from '../components/LottieAnimation.vue'
+  import UiPlaceholder from '../components/UiPlaceholder.vue'
+  
+  // 導入樣式文件
+  import './Home.scss'
+  
+  // 使用響應式參考來操作動畫
+  const arrowDownRef = ref(null)
+  
+  // 背景顏色過渡相關
+  const scrollProgress = ref(0);
+  const backgroundColor = computed(() => {
+    // 計算顏色值，從白色到黑色的漸變
+    const brightness = Math.floor(255 * (1 - scrollProgress.value));
+    return `rgb(${brightness}, ${brightness}, ${brightness})`;
+  });
+  const isDarkMode = computed(() => {
+    // 當背景色夠暗時，返回 true 以便切換文字顏色
+    return scrollProgress.value > 0.5;
+  });
+  
+  // 導航到首頁（不保留錨點）
+  const goToHome = () => {
+    // 使用History API徹底清除URL中的錨點
+    const cleanUrl = window.location.protocol + '//' + window.location.host + window.location.pathname;
+    window.history.pushState({}, '', cleanUrl);
+    // 強制刷新頁面
+    window.location.href = '/';
+  };
+  
+  // UI 項目詳情 modal 控制
+  const showDetailsModal = ref(false)
+  
+  // 定義一個介面使 description 成為可選屬性
+  interface Design {
+    name: string;
+    images: string[];
+    description?: string;
+  }
+  
+  const currentDesign = ref<Design>({
+    name: '',
+    images: []
+  })
+  
+  // 顯示 UI 詳情
+  const showUIDetails = (design: string) => {
+    // 設置當前設計
+    switch(design) {
+      case 'reserve':
+        currentDesign.value = {
+          name: 'Online Reservation',
+          images: ['ui-reserve01', 'ui-reserve02', 'ui-reserve03', 'ui-reserve04', 'ui-reserve05', 'ui-reserve06']
+        }
+        break;
+      case 'pomodoro':
+        currentDesign.value = {
+          name: 'Pomodoro Timer',
+          images: ['ui-pomodoro01', 'ui-pomodoro02', 'ui-pomodoro03', 'ui-pomodoro04', 'ui-pomodoro05', 'ui-pomodoro06']
+        }
+        break;
+      case 'coffee':
+        currentDesign.value = {
+          name: 'Website Design',
+          images: ['ui-coffee01', 'ui-coffee02', 'ui-coffee03', 'ui-coffee04', 'ui-coffee05', 'ui-coffee06']
+        }
+        break;
+      case 'payment':
+        currentDesign.value = {
+          name: 'Online Payment',
+          images: ['ui-payment01', 'ui-payment02', 'ui-payment03', 'ui-payment04', 'ui-payment05', 'ui-payment06']
+        }
+        break;
+    }
+    
+    // 開啟 modal
+    showDetailsModal.value = true
+  }
+  
+  // 關閉 modal
+  const closeModal = () => {
+    showDetailsModal.value = false
+  }
+  
+  // 處理圖片加載錯誤
+  const handleImageError = (event: Event) => {
+    const target = event.target as HTMLImageElement;
+    if (target) {
+      target.style.display = 'none';
+    }
+  }
+  
+  // 獲取圖片路徑
+  const getImagePath = (name: string) => {
+    // 嘗試使用相對路徑
+    try {
+      // 直接返回路徑字符串，在模板中使用
+      return new URL(`../assets/images/ui-design/${name}.jpg`, import.meta.url).href;
+    } catch (error) {
+      console.error('無法載入圖片:', name, error);
+      return '';
+    }
+  }
+  
+  onMounted(() => {
+    // 獲取重要的節點
+    const selectedProjectsSection = document.getElementById('selected-projects');
+    const scrollContainer = document.getElementById('horizontalScroll');
+    let inspirationTitle: Element | null = null;
+    
+    // 查找包含 "INSPIRATION" 的標題
+    document.querySelectorAll('section h2').forEach(h2 => {
+      if (h2.textContent?.includes('INSPIRATION')) {
+        inspirationTitle = h2;
+      }
+    });
+    
+    // 處理水平滾動邏輯
+    if (scrollContainer && inspirationTitle) {
+      const scrollContent = scrollContainer.querySelector('.flex') as HTMLElement;
+      if (scrollContent) {
+        const maxScroll = scrollContent.scrollWidth - scrollContainer.clientWidth;
+        
+        // 監聽頁面滾動
+        window.addEventListener('scroll', () => {
+          const containerRect = scrollContainer.getBoundingClientRect();
+          const titleRect = inspirationTitle!.getBoundingClientRect();
+          const windowHeight = window.innerHeight;
+          
+          // 調整觸發點：只有當容器底部進入視窗時才開始滾動
+          if (containerRect.bottom < windowHeight && titleRect.bottom > 0) {
+            // 計算滾動比例 (0 到 1)
+            const scrollStart = 0;
+            const scrollEnd = -titleRect.height - containerRect.height;
+            const totalScrollRange = scrollStart - scrollEnd;
+            
+            // 計算當前容器底部的相對位置
+            const currentPosition = containerRect.bottom - windowHeight;
+            
+            // 轉換為進度比例
+            const progress = Math.max(0, Math.min(1, -currentPosition / totalScrollRange));
+            
+            // 應用水平捲動
+            scrollContent.style.transform = `translateX(-${maxScroll * progress}px)`;
+          }
+        });
+      }
+    }
+    
+    // 處理背景顏色變化
+    window.addEventListener('scroll', () => {
+      // 檢查各節點是否存在
+      if (!selectedProjectsSection || !inspirationTitle) return;
+      
+      const selectedProjectsRect = selectedProjectsSection.getBoundingClientRect();
+      const inspirationTitleRect = inspirationTitle.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+      
+      // 背景顏色變化邏輯修改
+      // 當 SELECTED PROJECT 標題到達頁面頂部時，背景變為黑色
+      if (selectedProjectsRect.top <= 0) {
+        // 檢查是否已經開始看到 INSPIRATION 標題
+        if (inspirationTitleRect.top < windowHeight) {
+          // 開始從黑色變回白色
+          // 計算從 INSPIRATION 出現到完全進入視窗的進度
+          const totalFadeDistance = windowHeight;
+          const currentPosition = windowHeight - inspirationTitleRect.top;
+          const fadeBackProgress = Math.max(0, Math.min(1, currentPosition / totalFadeDistance));
+          
+          // 背景從黑色漸變回白色
+          scrollProgress.value = 1 - fadeBackProgress;
+        } else {
+          // SELECTED PROJECT 在頂部，但還沒看到 INSPIRATION，保持黑色
+          scrollProgress.value = 1;
+        }
+      } else {
+        // SELECTED PROJECT 還沒到頂部，根據滾動進度調整背景
+        const fadeDistance = windowHeight; // 在一個視窗高度內完成從白色到黑色的過渡
+        const currentPosition = windowHeight - selectedProjectsRect.top;
+        const fadeProgress = Math.max(0, Math.min(1, currentPosition / fadeDistance));
+        
+        scrollProgress.value = fadeProgress;
+      }
+    });
+    
+    // 初始觸發一次滾動事件，確保初始狀態正確
+    window.dispatchEvent(new Event('scroll'));
+  });
+</script>
+
 <style scoped>
-  h1 {
-    line-height: 1.1;
-  }
-  
-  p.leading-relaxed {
-    line-height: 1.5;
-  }
-  
-  .lottie-scroll {
-    cursor: pointer;
-  }
-  
-  .arrow-down-anim {
-    opacity: 0.8;
-  }
-  
-  #horizontalScroll {
-    overflow: hidden;
-  }
-  
-  #horizontalScroll .flex {
-    transition: transform 0.1s ease-out;
-  }
+/* 背景顏色過渡效果 */
+.bg-transition {
+  transition: background-color 0.5s ease;
+}
 </style>

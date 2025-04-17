@@ -1,0 +1,40 @@
+/* Home.scss - 從 Home.vue 移過來的樣式 */
+
+h1 {
+  line-height: 1.1;
+}
+
+p.leading-relaxed {
+  line-height: 1.5;
+}
+
+.lottie-scroll {
+  cursor: pointer;
+}
+
+.arrow-down-anim {
+  opacity: 0.8;
+}
+
+#horizontalScroll {
+  overflow: hidden;
+}
+
+#horizontalScroll .flex {
+  transition: transform 0.1s ease-out;
+}
+
+/* UI設計圖片和佔位符樣式 */
+.fallback {
+  /* 默認隱藏佔位符 */
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 當圖片隱藏時，顯示佔位符 */
+img[style*="display: none"] + .fallback {
+  opacity: 1;
+} 
