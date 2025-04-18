@@ -103,9 +103,12 @@
                   <p class="text-gray-700 mb-6">
                     發覺自己的心理問題，才能從情緒的根本上解決問題。我們與諮商心理師、輕度憂鬱者進行個別訪談研究，並分析市場產品，將產品目的與定義釐清，規劃完整的 App 內容。透過視覺化符碼與遊戲化互動，鼓勵使用者每日紀錄情緒，了解自身變化及原因，就像創作專屬的情緒雜誌。
                   </p>
-                  <a href="javascript:void(0)" class="text-primary-600 font-medium hover:text-primary-800 transition-colors inline-flex items-center">
-                    Coming Soon <span class="ml-1">→</span>
-                  </a>
+                  <RouterLink
+                    to="/project/moodzine"
+                    class="text-primary-600 font-medium hover:text-primary-800 transition-colors inline-flex items-center"
+                  >
+                    View Case Study <span class="ml-1">→</span>
+                  </RouterLink>
                 </div>
               </div>
             </div>

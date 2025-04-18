@@ -114,7 +114,7 @@ const handleImageError = (event: Event) => {
     </nav>
 
     <!-- Main Content -->
-    <main class="flex-1 w-full">
+    <main class="flex-1 w-full bg-white">
       <RouterView />
     </main>
 
