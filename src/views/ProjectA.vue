@@ -33,57 +33,74 @@ function backToHome() {
 </script>
 
 <template>
-  <div class="max-w-6xl mx-auto py-12 px-4 bg-white text-primary-900" lang="zh-Hant,en">
+  <div class="bg-white text-primary-900" lang="zh-Hant,en">
     <!-- 側邊導航組件 -->
     <ProjectNavbar :nav-items="navItems" :show-on-mobile="true" />
-    
-    <!-- 專案概述 -->
-    <div id="project-overview">
-      <!-- 新的標題佈局 -->
-      <div class="flex flex-col md:flex-row gap-6 md:gap-8 mb-12">
-        <!-- 左側圖標 -->
-        <div class="w-32 h-32 bg-white rounded-3xl shadow-md flex-shrink-0 overflow-hidden p-3 md:p-4 mx-auto md:mx-0">
-          <div class="w-full h-full bg-pink-200 rounded-2xl flex items-center justify-center">
-            <img src="../assets/images/moodzine/moodzine-appIcon.jpg" alt="moodzine-appIcon"
-              class="object-cover w-full h-full rounded-2xl" />
+
+    <!-- =========================================================
+         Hero — Aurora bg, big metadata grid
+         ========================================================= -->
+    <header class="aurora-bg relative pt-10 md:pt-16 pb-12 md:pb-20">
+      <div class="max-w-6xl mx-auto px-4 md:px-6">
+        <div v-reveal class="mb-6 md:mb-8">
+          <RouterLink
+            to="/#selected-projects"
+            class="inline-flex items-center gap-1.5 text-sm text-primary-500 hover:text-primary-900 transition-colors"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5" /><path d="m12 19-7-7 7-7" /></svg>
+            All projects
+          </RouterLink>
+        </div>
+
+        <div id="project-overview" v-reveal class="flex flex-col md:flex-row gap-6 md:gap-8 mb-10">
+          <div class="w-24 h-24 md:w-28 md:h-28 bg-white rounded-2xl shadow-card flex-shrink-0 overflow-hidden p-3 mx-auto md:mx-0 border border-primary-100">
+            <div class="w-full h-full bg-primary-100 rounded-xl flex items-center justify-center overflow-hidden">
+              <img src="../assets/images/moodzine/moodzine-appIcon.jpg" alt="MOODZiNE app icon"
+                class="object-cover w-full h-full rounded-xl" />
+            </div>
+          </div>
+
+          <div class="flex flex-col justify-center text-center md:text-left">
+            <span class="eyebrow eyebrow-accent eyebrow-dot mx-auto md:mx-0 mb-3">Case study · 2019</span>
+            <h1 class="text-display-lg font-display font-semibold tracking-tight">MOODZiNE</h1>
+            <p class="text-base md:text-lg text-primary-500 mt-2 italic">Feel who you are, embrace who you are.</p>
+            <div class="flex flex-wrap gap-2 mt-4 justify-center md:justify-start">
+              <span class="tag-soft">Emotional Management</span>
+              <span class="tag-soft">UI/UX Design</span>
+              <span class="tag-soft">Interview Research</span>
+            </div>
           </div>
         </div>
 
-        <!-- 右側標題內容 -->
-        <div class="flex flex-col justify-center mt-4 md:mt-0 text-center md:text-left">
-          <h1 class="text-4xl md:text-5xl font-bold mb-2">MOODZiNE</h1>
-          <p class="text-lg md:text-xl text-gray-600 mb-4 italic">Feel who you are, embrace who you are</p>
-          <div class="flex flex-wrap gap-2 mb-6 justify-center md:justify-start">
-            <span class="bg-gray-100 text-gray-800 text-sm px-2 py-1 rounded">Emotional Management</span>
-            <span class="bg-gray-100 text-gray-800 text-sm px-2 py-1 rounded">UI/UX Design</span>
-            <span class="bg-gray-100 text-gray-800 text-sm px-2 py-1 rounded">Interview Research</span>
+        <div v-reveal class="img-wrap aspect-[16/9] md:aspect-[16/8] mb-10">
+          <img src="../assets/images/moodzine/moodzine-landing.jpg" alt="moodzineLanding"
+            class="w-full h-full object-cover" />
+        </div>
+
+        <div v-reveal.stagger class="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 pt-2">
+          <div class="border-l-2 border-primary-200 pl-4">
+            <div class="text-[11px] uppercase tracking-[0.2em] text-primary-500 mb-1">Timeline</div>
+            <p class="text-primary-900 font-medium">2019.01 – 2019.06</p>
+          </div>
+          <div class="border-l-2 border-primary-200 pl-4">
+            <div class="text-[11px] uppercase tracking-[0.2em] text-primary-500 mb-1">Role</div>
+            <p class="text-primary-900 font-medium">UI / UX Designer · Co-PM</p>
+          </div>
+          <div class="border-l-2 border-primary-200 pl-4">
+            <div class="text-[11px] uppercase tracking-[0.2em] text-primary-500 mb-1">Outcome</div>
+            <p class="text-primary-900 font-medium">輔大應美所展覽</p>
+          </div>
+          <div class="border-l-2 border-primary-200 pl-4">
+            <div class="text-[11px] uppercase tracking-[0.2em] text-primary-500 mb-1">Tools</div>
+            <p class="text-primary-900 font-medium">Adobe XD · Illustrator</p>
           </div>
         </div>
       </div>
+    </header>
 
-      <div class="bg-gray-800 h-72 md:h-96 lg:h-[500px] w-full rounded-lg mb-12">
-        <img src="../assets/images/moodzine/moodzine-landing.jpg" alt="moodzineLanding"
-          class="w-full h-full object-cover rounded-lg" />
-      </div>
-
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-12 mb-12 md:mb-16">
-        <div>
-          <h3 class="text-xl font-medium mb-2 md:mb-4">專案期間</h3>
-          <p class="text-primary-700">2019.01 - 2019.06</p>
-        </div>
-        <div>
-          <h3 class="text-xl font-medium mb-2 md:mb-4">負責角色</h3>
-          <p class="text-primary-700">共同策劃、UI / UX 設計師</p>
-        </div>
-        <div>
-          <h3 class="text-xl font-medium mb-2 md:mb-4">成果產出</h3>
-          <p class="text-primary-700 mb-1">輔大應用美術研究所展覽</p>
-        </div>
-        <div>
-          <h3 class="text-xl font-medium mb-2 md:mb-4">工具軟體</h3>
-          <p class="text-primary-700 mb-1">Adobe XD, Illustrator</p>
-        </div>
-      </div>
+    <!-- Body -->
+    <div class="max-w-6xl mx-auto py-12 md:py-16 px-4 md:px-6">
+      <div id="project-overview-body"></div>
 
       <!-- Overview -->
       <div class="mb-12 md:mb-16">
@@ -109,7 +126,7 @@ function backToHome() {
       <!-- 專案背景 -->
       <div id="project-background" class="mb-12 md:mb-16">
         <h2 class="text-2xl md:text-3xl font-semibold mb-6 md:mb-8 flex items-center">
-          <span class="inline-block w-2 h-8 bg-coral-500 mr-4"></span>
+          <span class="inline-block w-1 h-8 rounded-full bg-primary-900 mr-4"></span>
           <span class=" flex items-center font-bold">專案背景</span>
         </h2>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-2 md:gap-12">
@@ -158,7 +175,7 @@ function backToHome() {
       <!-- 競品分析 -->
       <div id="competitor-analysis" class="mb-12 md:mb-16">
         <h2 class="text-2xl md:text-3xl font-semibold mb-6 md:mb-8 flex items-center">
-          <span class="inline-block w-2 h-8 bg-coral-500 mr-4"></span>
+          <span class="inline-block w-1 h-8 rounded-full bg-primary-900 mr-4"></span>
           <span class=" flex items-center font-bold">競品分析</span>
         </h2>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-12 mb-8">
@@ -242,7 +259,7 @@ function backToHome() {
       <!-- 使用者研究 -->
       <div id="user-research" class="mb-12 md:mb-16">
         <h2 class="text-2xl md:text-3xl font-semibold mb-6 md:mb-8 flex items-center">
-          <span class="inline-block w-2 h-8 bg-coral-500 mr-4"></span>
+          <span class="inline-block w-1 h-8 rounded-full bg-primary-900 mr-4"></span>
           <span class=" flex items-center font-bold">使用者研究 - 訪談研究</span>
         </h2>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-2 md:gap-12">
@@ -293,7 +310,7 @@ function backToHome() {
       <!-- 定義問題 -->
       <div id="problem-definition" class="mb-12 md:mb-16">
         <h2 class="text-2xl md:text-3xl font-semibold mb-6 md:mb-8 flex items-center">
-          <span class="inline-block w-2 h-8 bg-coral-500 mr-4"></span>
+          <span class="inline-block w-1 h-8 rounded-full bg-primary-900 mr-4"></span>
           <span class=" flex items-center font-bold">定義問題</span>
         </h2>
         <h3 class="text-2xl font-bold mb-8">1. 定義問題</h3>
@@ -396,7 +413,7 @@ function backToHome() {
       <!-- 介面規劃 -->
       <div id="interface-planning" class="mb-12 md:mb-16">
         <h2 class="text-2xl md:text-3xl font-semibold mb-6 md:mb-8 flex items-center">
-          <span class="inline-block w-2 h-8 bg-coral-500 mr-4"></span>
+          <span class="inline-block w-1 h-8 rounded-full bg-primary-900 mr-4"></span>
           <span class=" flex items-center font-bold">介面規劃</span>
         </h2>
         <h3 class="text-2xl font-bold mb-8">1. User Flow</h3>
@@ -577,7 +594,7 @@ function backToHome() {
       <!-- 原型設計 -->
       <div id="prototype-design" class="mb-12 md:mb-16">
         <h2 class="text-2xl md:text-3xl font-semibold mb-6 md:mb-8 flex items-center">
-          <span class="inline-block w-2 h-8 bg-coral-500 mr-4"></span>
+          <span class="inline-block w-1 h-8 rounded-full bg-primary-900 mr-4"></span>
           <span class=" flex items-center font-bold">原型設計</span>
         </h2>
         <h3 class="text-2xl font-bold mb-8">介面展示</h3>
@@ -586,7 +603,7 @@ function backToHome() {
           <div class="flex justify-center mt-4">
             <a href="https://xd.adobe.com/view/1eb57491-06e5-4925-b11e-cf7ee2ee9360-4be6/?fullscreen" target="_blank"
               rel="noopener noreferrer"
-              class="my-4 px-8 py-4 bg-coral-500 text-white rounded-md hover:bg-coral-600 transition-colors text-lg font-medium flex items-center cursor-pointer">
+              class="my-4 btn btn-lg btn-primary cursor-pointer">
               PROTOTYPE <span class="ml-2 text-white">→</span>
             </a>
           </div>
@@ -597,7 +614,7 @@ function backToHome() {
       <!-- 反思與回饋 -->
       <div id="project-reflection" class="mb-12 md:mb-16">
         <h2 class="text-2xl md:text-3xl font-semibold mb-6 md:mb-8 flex items-center">
-          <span class="inline-block w-2 h-8 bg-coral-500 mr-4"></span>
+          <span class="inline-block w-1 h-8 rounded-full bg-primary-900 mr-4"></span>
           <span class=" flex items-center font-bold">反思與回饋</span>
         </h2>
         <h3 class="text-2xl font-bold mb-8">1. 專案反思</h3>
@@ -687,7 +704,7 @@ function backToHome() {
       <!-- Back to project -->
       <div class="flex justify-between items-center pt-6 md:pt-8 border-t border-gray-300 mt-8 md:mt-12">
         <RouterLink to="/"
-          class="text-primary-600 hover:text-accent-500 transition-colors font-medium flex items-center"
+          class="text-primary-600 hover:text-primary-900 transition-colors font-medium flex items-center"
           @click="backToHome">
           ← Back to Projects
         </RouterLink>

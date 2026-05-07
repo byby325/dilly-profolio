@@ -1,96 +1,194 @@
 <script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
-import { ref } from 'vue'
+import { RouterLink, RouterView, useRouter } from 'vue-router'
+import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
 import Footer from './components/Footer.vue'
+import CustomCursor from './components/CustomCursor.vue'
 
-// 控制移動端選單是否展開
+const router = useRouter()
+
+// 控制行動版選單是否展開
 const mobileMenuOpen = ref(false)
 
-// 切換移動端選單
-const toggleMobileMenu = () => {
-  mobileMenuOpen.value = !mobileMenuOpen.value
+// 滾動超過閾值後切換 navbar 的視覺狀態
+const scrolled = ref(false)
+const onScroll = () => {
+  scrolled.value = window.scrollY > 8
 }
 
-// 圖片錯誤處理函數
-const handleImageError = (event: Event) => {
-  const img = event.target as HTMLImageElement;
-  const altText = img.alt || 'Image';
+// View Transitions API — 平滑路由切換
+let started = false
+router.beforeResolve((_to, _from, next) => {
+  // 第一次載入不啟用 view transition (會閃)
+  if (!started) {
+    started = true
+    return next()
+  }
+  // @ts-expect-error - 漸進式增強 API
+  if (typeof document !== 'undefined' && document.startViewTransition) {
+    // @ts-expect-error
+    document.startViewTransition(() => next())
+  } else {
+    next()
+  }
+})
 
-  // 創建一個替代的div來顯示圖片無法載入的訊息
-  const placeholder = document.createElement('div');
-  placeholder.className = img.className.replace('object-cover', '');
-  placeholder.classList.add('flex', 'items-center', 'justify-center', 'bg-gray-200', 'text-gray-600');
+watch(
+  () => router.currentRoute.value.fullPath,
+  () => {
+    mobileMenuOpen.value = false
+  },
+)
 
-  // 設置placeholder的尺寸
-  placeholder.style.width = '100%';
-  placeholder.style.height = '100%';
+// 鎖定 / 釋放 body scroll
+watch(mobileMenuOpen, (open) => {
+  if (typeof document === 'undefined') return
+  document.documentElement.style.overflow = open ? 'hidden' : ''
+})
 
-  // 添加文字
-  placeholder.textContent = `${altText}`;
-
-  // 替換原始圖片
-  img.parentNode?.replaceChild(placeholder, img);
+// 鍵盤 ESC 關閉 mobile menu
+const onKeyDown = (e: KeyboardEvent) => {
+  if (e.key === 'Escape') mobileMenuOpen.value = false
 }
+
+onMounted(() => {
+  onScroll()
+  window.addEventListener('scroll', onScroll, { passive: true })
+  window.addEventListener('keydown', onKeyDown)
+})
+onUnmounted(() => {
+  window.removeEventListener('scroll', onScroll)
+  window.removeEventListener('keydown', onKeyDown)
+  document.documentElement.style.overflow = ''
+})
+
+const navItems = [
+  { to: '/', label: 'Work' },
+  { to: '/about', label: 'About' },
+  { to: '/resume', label: 'Resume' },
+]
+
+const navClasses = computed(() => [
+  'fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-out-expo',
+  scrolled.value
+    ? 'glass border-b border-primary-100/80 py-2.5'
+    : 'bg-transparent border-b border-transparent py-4',
+])
 </script>
 
 <template>
   <div class="flex flex-col min-h-screen">
+    <CustomCursor />
+
     <!-- Navigation -->
-    <nav class="w-full py-3 md:py-4 bg-white border-b border-primary-200 relative">
-      <div class="container mx-auto flex justify-between items-center px-4 md:px-8 lg:px-16">
+    <nav :class="navClasses" aria-label="Primary">
+      <div class="shell flex items-center justify-between gap-6">
         <!-- Logo -->
-        <div class="flex-shrink-0">
-          <RouterLink to="/" class="flex items-center">
-            <img src="./assets/images/logos/logo-dilly.png" alt="Dilly Logo" class="h-[60px] w-[60px] object-contain"
-              @error="handleImageError" />
-          </RouterLink>
-        </div>
+        <RouterLink
+          to="/"
+          class="group flex items-center gap-3"
+          aria-label="Dilly Chen — back to home"
+        >
+          <span class="relative inline-flex w-10 h-10 items-center justify-center rounded-xl bg-primary-900 text-white font-display font-semibold text-sm shadow-soft overflow-hidden transition-transform duration-500 ease-out-expo group-hover:scale-105">
+            <span class="relative z-10">DC</span>
+          </span>
+          <span class="hidden sm:inline-flex flex-col leading-none">
+            <span class="font-display text-sm font-semibold tracking-tight text-primary-900">Dilly Chen</span>
+            <span class="text-[11px] text-primary-500 mt-0.5">Senior Product Designer</span>
+          </span>
+        </RouterLink>
 
         <!-- Desktop Navigation -->
-        <div class="hidden md:flex space-x-10 justify-end">
-          <RouterLink to="/" class="text-primary-600 hover:text-accent transition-colors font-medium">Project
-          </RouterLink>
-          <RouterLink to="/about" class="text-primary-600 hover:text-accent transition-colors font-medium">About
+        <div class="hidden md:flex items-center gap-1">
+          <RouterLink
+            v-for="item in navItems"
+            :key="item.to"
+            :to="item.to"
+            class="nav-link"
+            active-class="is-active"
+            exact-active-class="is-exact"
+          >
+            <span>{{ item.label }}</span>
           </RouterLink>
         </div>
 
-        <!-- Mobile Navigation Button -->
-        <button class="md:hidden text-primary-700 p-2" aria-label="Toggle menu" @click="toggleMobileMenu">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
-          </svg>
+        <!-- CTA -->
+        <div class="hidden md:flex items-center gap-2">
+          <a
+            href="mailto:byby325@gmail.com"
+            class="btn btn-primary"
+            v-magnetic="0.25"
+          >
+            Let's talk
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-4 w-4 transition-transform duration-300 ease-out-expo group-hover:translate-x-1"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M5 12h14" />
+              <path d="m12 5 7 7-7 7" />
+            </svg>
+          </a>
+        </div>
+
+        <!-- Mobile menu button -->
+        <button
+          class="md:hidden inline-flex items-center justify-center w-10 h-10 rounded-full text-primary-900 hover:bg-primary-100"
+          aria-label="Toggle menu"
+          :aria-expanded="mobileMenuOpen"
+          @click="mobileMenuOpen = !mobileMenuOpen"
+        >
+          <span class="hamburger" :class="{ 'is-active': mobileMenuOpen }">
+            <span /><span /><span />
+          </span>
         </button>
       </div>
 
       <!-- Mobile Menu -->
-      <div v-if="mobileMenuOpen"
-        class="md:hidden absolute top-full left-0 right-0 bg-white border-b border-primary-200 z-50 shadow-md">
-        <div class="container mx-auto px-4 py-3">
-          <div class="flex flex-col space-y-4">
-            <RouterLink to="/#selected-projects"
-              class="text-primary-600 hover:text-accent transition-colors font-medium py-2"
-              @click="mobileMenuOpen = false">
-              Project
+      <Transition name="mobile-menu">
+        <div
+          v-if="mobileMenuOpen"
+          class="md:hidden absolute top-full left-0 right-0 glass border-b border-primary-100"
+          role="dialog"
+          aria-modal="true"
+        >
+          <div class="shell py-4 flex flex-col gap-1">
+            <RouterLink
+              v-for="item in navItems"
+              :key="item.to"
+              :to="item.to"
+              class="py-3 px-3 rounded-lg text-base font-medium text-primary-800 hover:bg-primary-100 transition-colors"
+              active-class="bg-primary-900 text-white hover:bg-primary-900"
+            >
+              {{ item.label }}
             </RouterLink>
-            <RouterLink to="/about" class="text-primary-600 hover:text-accent transition-colors font-medium py-2"
-              @click="mobileMenuOpen = false">
-              About
-            </RouterLink>
-            <RouterLink to="/resume" class="text-primary-600 hover:text-accent transition-colors font-medium py-2"
-              @click="mobileMenuOpen = false">
-              Resume
-            </RouterLink>
+            <a
+              href="mailto:byby325@gmail.com"
+              class="mt-2 btn btn-primary w-full justify-center"
+            >
+              Let's talk →
+            </a>
           </div>
         </div>
-      </div>
+      </Transition>
     </nav>
 
+    <!-- 為了避免 fixed nav 蓋住內容 -->
+    <div aria-hidden="true" class="h-[68px] md:h-[72px]" />
+
     <!-- Main Content -->
-    <main class="flex-1 w-full bg-white">
-      <RouterView />
+    <main class="flex-1 w-full">
+      <RouterView v-slot="{ Component, route }">
+        <Transition name="page" mode="out-in">
+          <component :is="Component" :key="route.fullPath" />
+        </Transition>
+      </RouterView>
     </main>
 
-    <!-- Footer -->
     <Footer />
   </div>
 </template>
@@ -98,45 +196,112 @@ const handleImageError = (event: Event) => {
 <style>
 @import './assets/base.css';
 
-/* 全域樣式 */
 body {
   margin: 0;
   padding: 0;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  overflow-x: hidden;
-  width: 100%;
-  color: #18181b;
-  /* primary-900 顏色 */
-}
-
-html {
-  box-sizing: border-box;
-  width: 100%;
-  overflow-x: hidden;
-}
-
-*,
-*::before,
-*::after {
-  box-sizing: inherit;
 }
 
 #app {
   width: 100%;
   min-width: 100%;
   overflow-x: hidden;
-  color: #18181b;
-  /* primary-900 顏色 */
-}
-
-.router-link-active {
-  color: #2563eb !important;
+  color: #0a0a0a;
 }
 
 .container {
   width: 100%;
-  max-width: 1536px;
+  max-width: 1320px;
   margin-left: auto;
   margin-right: auto;
+}
+
+/* Nav links */
+.nav-link {
+  display: inline-flex;
+  align-items: center;
+  position: relative;
+  padding: 0.5rem 0.875rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: rgb(63 63 70);
+  border-radius: 9999px;
+  transition: color 250ms var(--ease-out-expo),
+    background-color 250ms var(--ease-out-expo);
+}
+.nav-link:hover {
+  color: rgb(24 24 27);
+  background-color: rgba(244, 244, 245, 0.7);
+}
+.nav-link.is-exact,
+.nav-link.is-active {
+  color: rgb(24 24 27);
+  background-color: rgb(244 244 245);
+}
+
+/* Hamburger to X */
+.hamburger {
+  width: 18px;
+  height: 14px;
+  position: relative;
+  display: inline-block;
+}
+.hamburger span {
+  position: absolute;
+  left: 0;
+  width: 18px;
+  height: 1.5px;
+  background: currentColor;
+  transition:
+    transform 350ms var(--ease-out-expo),
+    opacity 250ms var(--ease-out-expo),
+    top 350ms var(--ease-out-expo);
+  border-radius: 2px;
+}
+.hamburger span:nth-child(1) {
+  top: 1px;
+}
+.hamburger span:nth-child(2) {
+  top: 7px;
+}
+.hamburger span:nth-child(3) {
+  top: 13px;
+}
+.hamburger.is-active span:nth-child(1) {
+  top: 7px;
+  transform: rotate(45deg);
+}
+.hamburger.is-active span:nth-child(2) {
+  opacity: 0;
+}
+.hamburger.is-active span:nth-child(3) {
+  top: 7px;
+  transform: rotate(-45deg);
+}
+
+/* Mobile menu transition */
+.mobile-menu-enter-active,
+.mobile-menu-leave-active {
+  transition: opacity 250ms var(--ease-out-expo),
+    transform 350ms var(--ease-out-expo);
+}
+.mobile-menu-enter-from,
+.mobile-menu-leave-to {
+  opacity: 0;
+  transform: translateY(-8px);
+}
+
+/* Page transition fallback when View Transitions API unsupported */
+.page-enter-active,
+.page-leave-active {
+  transition: opacity 320ms var(--ease-out-expo),
+    transform 420ms var(--ease-out-expo);
+}
+.page-enter-from {
+  opacity: 0;
+  transform: translateY(12px);
+}
+.page-leave-to {
+  opacity: 0;
+  transform: translateY(-8px);
 }
 </style>

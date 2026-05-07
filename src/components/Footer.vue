@@ -1,44 +1,160 @@
+<script setup lang="ts">
+import { RouterLink } from 'vue-router'
+import { reveal as vReveal } from '../directives/reveal'
+
+const year = new Date().getFullYear()
+
+const links = [
+  { label: 'Work', to: '/' },
+  { label: 'About', to: '/about' },
+  { label: 'Resume', to: '/resume' },
+]
+
+const social = [
+  {
+    label: 'LinkedIn',
+    href: 'https://www.linkedin.com/in/dilly-chen/',
+  },
+  {
+    label: 'Email',
+    href: 'mailto:byby325@gmail.com',
+  },
+  {
+    label: 'Medium',
+    href: 'https://medium.com/@dilly_chen',
+  },
+]
+</script>
+
 <template>
-  <footer class="bg-gray-100 py-12 border-t border-gray-200">
-    <div class="container mx-auto px-4 md:px-8 lg:px-16">
-      <div class="flex flex-col md:flex-row md:justify-between md:items-start">
-        <!-- Logo and Copyright -->
-        <div class="mb-8 md:mb-0">
-          <div class="text-xl font-bold text-primary-900 mb-2">DILLY CHEN</div>
-          <p class="text-sm text-primary-700">
-            &copy; 2025 Dilly Chen. All rights reserved.
+  <footer class="relative isolate overflow-hidden bg-primary-950 text-white">
+    <!-- Subtle mono glow -->
+    <div
+      aria-hidden="true"
+      class="pointer-events-none absolute inset-0 -z-10 opacity-60"
+      style="
+        background:
+          radial-gradient(60% 60% at 12% 0%, rgba(255,255,255,0.06), transparent 60%),
+          radial-gradient(50% 50% at 100% 100%, rgba(255,255,255,0.04), transparent 60%);
+      "
+    />
+
+    <div class="shell py-16 md:py-24">
+      <!-- Big call-to-action band -->
+      <div v-reveal class="flex flex-col gap-6 md:gap-8 max-w-3xl">
+        <span class="section-eyebrow text-primary-300">
+          <span class="inline-block w-6 h-px bg-current opacity-60" />
+          Let's collaborate
+        </span>
+        <h2 class="text-display-lg font-display font-semibold tracking-tight text-balance">
+          Have a product worth designing well? Let's make it
+          <em class="not-italic underline decoration-2 underline-offset-[6px] decoration-white/40">memorable</em>.
+        </h2>
+        <p class="text-primary-300 max-w-xl">
+          I'm always open to chatting about SaaS product design, design systems, or
+          DesignOps. Drop a note any time — I usually reply within a day.
+        </p>
+        <div class="flex flex-wrap gap-3 pt-2">
+          <a
+            href="mailto:byby325@gmail.com"
+            class="btn btn-lg bg-white text-primary-950 hover:bg-primary-100 hover:-translate-y-0.5"
+            v-magnetic="0.25"
+          >
+            byby325@gmail.com
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-4 w-4"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M5 12h14" />
+              <path d="m12 5 7 7-7 7" />
+            </svg>
+          </a>
+          <a
+            href="https://www.linkedin.com/in/dilly-chen/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn btn-lg border border-white/20 bg-white/5 text-white hover:bg-white/10"
+          >
+            LinkedIn
+          </a>
+        </div>
+      </div>
+
+      <div class="hairline opacity-40 my-12" />
+
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-sm">
+        <div class="col-span-2">
+          <div class="flex items-center gap-3 mb-4">
+            <span class="inline-flex w-9 h-9 items-center justify-center rounded-xl bg-white text-primary-950 font-display font-semibold">DC</span>
+            <span class="font-display font-semibold tracking-tight">Dilly Chen</span>
+          </div>
+          <p class="text-primary-300 max-w-sm leading-relaxed">
+            Senior Product Designer crafting end-to-end SaaS experiences that balance
+            business goals and user needs.
           </p>
         </div>
-        
-        <!-- Get in Touch Column -->
+
         <div>
-          <h3 class="text-lg font-semibold mb-4 text-primary-900">Get in Touch!</h3>
-          <ul class="space-y-3">
-            <li class="text-primary-700 flex items-center">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-              </svg>
-              byby325@gmail.com
+          <h4 class="text-xs font-semibold tracking-[0.2em] uppercase text-primary-400 mb-4">
+            Sitemap
+          </h4>
+          <ul class="space-y-2.5">
+            <li v-for="link in links" :key="link.to">
+              <RouterLink
+                :to="link.to"
+                class="text-primary-200 hover:text-white transition-colors"
+              >
+                {{ link.label }}
+              </RouterLink>
             </li>
-            <li>
-              <a href="https://www.linkedin.com/in/dilly-chen/" target="_blank" rel="noopener noreferrer" class="text-primary-700 hover:text-primary-900 transition-colors flex items-center">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="text-xs font-semibold tracking-[0.2em] uppercase text-primary-400 mb-4">
+            Elsewhere
+          </h4>
+          <ul class="space-y-2.5">
+            <li v-for="s in social" :key="s.href">
+              <a
+                :href="s.href"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-primary-200 hover:text-white transition-colors inline-flex items-center gap-1.5"
+              >
+                {{ s.label }}
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-3.5 w-3.5 opacity-50"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M7 17 17 7" />
+                  <path d="M7 7h10v10" />
                 </svg>
-                LinkedIn
               </a>
             </li>
           </ul>
         </div>
       </div>
+
+      <div class="mt-12 flex flex-col-reverse gap-4 md:flex-row md:items-center md:justify-between text-xs text-primary-400">
+        <p>© {{ year }} Dilly Chen. Designed &amp; built with care.</p>
+        <p class="inline-flex items-center gap-2">
+          <span class="inline-block w-1.5 h-1.5 rounded-full bg-white animate-pulse-soft" />
+          Currently open to product design collaborations.
+        </p>
+      </div>
     </div>
   </footer>
 </template>
-
-<script setup lang="ts">
-
-</script>
-
-<style scoped>
-/* Footer 特定樣式可以在這裡添加 */
-</style> 

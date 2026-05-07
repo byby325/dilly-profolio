@@ -1,53 +1,105 @@
-/* color palette from <https://github.com/vuejs/theme> */
+/* =========================================================
+   Design Tokens — SaaS / product-led
+   ========================================================= */
 :root {
+  /* Surface */
+  --color-bg: #ffffff;
+  --color-bg-soft: #fafafa;
+  --color-bg-mute: #f4f4f5;
+  --color-ink: #0a0a0a;
+  --color-ink-soft: #18181b;
+  --color-ink-muted: #52525b;
+  --color-ink-subtle: #71717a;
+
+  /* Border */
+  --color-border: rgba(15, 23, 42, 0.08);
+  --color-border-strong: rgba(15, 23, 42, 0.16);
+  --color-border-hover: rgba(15, 23, 42, 0.24);
+
+  /* Brand */
+  --color-accent: #4f46e5;
+  --color-accent-hover: #4338ca;
+  --color-accent-soft: #eef2ff;
+
+  /* Soft monochrome backdrop — keeps depth without colour */
+  --gradient-aurora: radial-gradient(
+      120% 80% at 0% 0%,
+      rgba(15, 23, 42, 0.05) 0%,
+      transparent 60%
+    ),
+    radial-gradient(
+      100% 80% at 100% 0%,
+      rgba(15, 23, 42, 0.035) 0%,
+      transparent 60%
+    );
+  --gradient-mesh: radial-gradient(
+      ellipse 80% 60% at 20% 10%,
+      rgba(15, 23, 42, 0.04),
+      transparent 60%
+    ),
+    radial-gradient(
+      ellipse 70% 50% at 80% 90%,
+      rgba(15, 23, 42, 0.03),
+      transparent 60%
+    );
+
+  /* Shadow */
+  --shadow-soft: 0 1px 2px rgba(15, 23, 42, 0.04),
+    0 1px 3px rgba(15, 23, 42, 0.06);
+  --shadow-card: 0 4px 12px -2px rgba(15, 23, 42, 0.06),
+    0 2px 6px -2px rgba(15, 23, 42, 0.04);
+  --shadow-card-hover: 0 24px 48px -16px rgba(15, 23, 42, 0.16),
+    0 8px 16px -8px rgba(15, 23, 42, 0.08);
+  --shadow-elevated: 0 32px 64px -24px rgba(15, 23, 42, 0.24),
+    0 12px 24px -12px rgba(15, 23, 42, 0.12);
+  --shadow-glow: 0 0 0 1px rgba(15, 23, 42, 0.12),
+    0 12px 32px -8px rgba(15, 23, 42, 0.18);
+
+  /* Radius */
+  --radius-sm: 0.375rem;
+  --radius-md: 0.625rem;
+  --radius-lg: 0.875rem;
+  --radius-xl: 1.25rem;
+  --radius-2xl: 1.75rem;
+
+  /* Motion — global easing & duration */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-spring: cubic-bezier(0.5, -0.5, 0.1, 1.5);
+  --duration-fast: 200ms;
+  --duration-base: 350ms;
+  --duration-slow: 600ms;
+  --duration-x-slow: 1000ms;
+
+  /* Section spacing */
+  --section-gap: clamp(4rem, 8vw, 9rem);
+
+  /* Cursor */
+  --cursor-size: 28px;
+  --cursor-glow: 280px;
+
+  /* Legacy (retained for any old references) */
   --vt-c-white: #ffffff;
   --vt-c-white-soft: #f8f8f8;
   --vt-c-white-mute: #f2f2f2;
-
   --vt-c-black: #18181b;
   --vt-c-black-soft: #222222;
   --vt-c-black-mute: #282828;
-
   --vt-c-indigo: #2c3e50;
-
   --vt-c-divider-light-1: rgba(60, 60, 60, 0.29);
   --vt-c-divider-light-2: rgba(60, 60, 60, 0.12);
   --vt-c-divider-dark-1: rgba(84, 84, 84, 0.65);
   --vt-c-divider-dark-2: rgba(84, 84, 84, 0.48);
-
   --vt-c-text-light-1: #18181b;
   --vt-c-text-light-2: #27272a;
   --vt-c-text-dark-1: var(--vt-c-white);
   --vt-c-text-dark-2: rgba(235, 235, 235, 0.64);
-}
 
-/* semantic color variables for this project */
-:root {
-  --color-background: var(--vt-c-white);
-  --color-background-soft: var(--vt-c-white-soft);
-  --color-background-mute: var(--vt-c-white-mute);
-
-  --color-border: var(--vt-c-divider-light-2);
-  --color-border-hover: var(--vt-c-divider-light-1);
-
-  --color-heading: var(--vt-c-text-light-1);
-  --color-text: var(--vt-c-text-light-1);
-
-  --section-gap: 160px;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --color-background: var(--vt-c-black);
-    --color-background-soft: var(--vt-c-black-soft);
-    --color-background-mute: var(--vt-c-black-mute);
-
-    --color-border: var(--vt-c-divider-dark-2);
-    --color-border-hover: var(--vt-c-divider-dark-1);
-
-    --color-heading: var(--vt-c-text-dark-1);
-    --color-text: var(--vt-c-text-dark-2);
-  }
+  --color-background: var(--color-bg);
+  --color-background-soft: var(--color-bg-soft);
+  --color-background-mute: var(--color-bg-mute);
+  --color-heading: var(--color-ink);
+  --color-text: var(--color-ink-soft);
 }
 
 *,
@@ -58,29 +110,284 @@
   font-weight: normal;
 }
 
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
 body {
   min-height: 100vh;
-  color: var(--color-text);
-  background: var(--color-background);
-  transition:
-    color 0.5s,
-    background-color 0.5s;
+  color: var(--color-ink-soft);
+  background: var(--color-bg);
   line-height: 1.6;
-  font-family:
-    Inter,
-    -apple-system,
-    BlinkMacSystemFont,
-    'Segoe UI',
-    Roboto,
-    Oxygen,
-    Ubuntu,
-    Cantarell,
-    'Fira Sans',
-    'Droid Sans',
-    'Helvetica Neue',
-    sans-serif;
+  font-family: 'Inter var', Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    Roboto, Oxygen, Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans',
+    'Helvetica Neue', sans-serif;
+  font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11', 'ss01';
   font-size: 15px;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* =========================================================
+   Selection / Focus
+   ========================================================= */
+::selection {
+  background: rgba(15, 23, 42, 0.92);
+  color: #ffffff;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-ink);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* =========================================================
+   Scrollbar — subtle SaaS look
+   ========================================================= */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(15, 23, 42, 0.18);
+  border-radius: 999px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(15, 23, 42, 0.32);
+  background-clip: padding-box;
+  border: 2px solid transparent;
+}
+
+/* =========================================================
+   Reduced motion — graceful degradation
+   ========================================================= */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* =========================================================
+   Reveal on scroll — for v-reveal directive
+   ========================================================= */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 800ms var(--ease-out-expo),
+    transform 800ms var(--ease-out-expo);
+  will-change: opacity, transform;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+.reveal-stagger > * {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 700ms var(--ease-out-expo),
+    transform 700ms var(--ease-out-expo);
+}
+.reveal-stagger.is-visible > * {
+  opacity: 1;
+  transform: none;
+}
+.reveal-stagger.is-visible > *:nth-child(1) {
+  transition-delay: 0ms;
+}
+.reveal-stagger.is-visible > *:nth-child(2) {
+  transition-delay: 80ms;
+}
+.reveal-stagger.is-visible > *:nth-child(3) {
+  transition-delay: 160ms;
+}
+.reveal-stagger.is-visible > *:nth-child(4) {
+  transition-delay: 240ms;
+}
+.reveal-stagger.is-visible > *:nth-child(5) {
+  transition-delay: 320ms;
+}
+.reveal-stagger.is-visible > *:nth-child(6) {
+  transition-delay: 400ms;
+}
+
+/* =========================================================
+   View transition — smooth route changes
+   ========================================================= */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 480ms;
+  animation-timing-function: var(--ease-out-expo);
+}
+::view-transition-old(root) {
+  animation-name: vt-fade-out;
+}
+::view-transition-new(root) {
+  animation-name: vt-fade-in;
+}
+@keyframes vt-fade-out {
+  to {
+    opacity: 0;
+    transform: translateY(-12px);
+  }
+}
+@keyframes vt-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+}
+
+/* =========================================================
+   Custom cursor — desktop only
+   ========================================================= */
+.cursor-dot,
+.cursor-glow {
+  pointer-events: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  transform: translate3d(-50%, -50%, 0);
+  border-radius: 9999px;
+  mix-blend-mode: difference;
+  display: none;
+}
+@media (hover: hover) and (pointer: fine) {
+  .cursor-dot,
+  .cursor-glow {
+    display: block;
+  }
+}
+.cursor-dot {
+  width: 8px;
+  height: 8px;
+  background: #ffffff;
+  transition:
+    width 250ms var(--ease-out-expo),
+    height 250ms var(--ease-out-expo),
+    background 250ms var(--ease-out-expo);
+}
+.cursor-glow {
+  width: var(--cursor-size);
+  height: var(--cursor-size);
+  border: 1.5px solid rgba(255, 255, 255, 0.7);
+  transition:
+    width 350ms var(--ease-out-expo),
+    height 350ms var(--ease-out-expo),
+    border-color 350ms var(--ease-out-expo);
+  mix-blend-mode: difference;
+}
+body.cursor--hover .cursor-dot {
+  width: 4px;
+  height: 4px;
+}
+body.cursor--hover .cursor-glow {
+  width: 56px;
+  height: 56px;
+  border-color: rgba(255, 255, 255, 0.85);
+}
+
+/* =========================================================
+   Marquee — pausable on hover
+   ========================================================= */
+.marquee {
+  display: flex;
+  width: 100%;
+  overflow: hidden;
+  mask-image: linear-gradient(
+    90deg,
+    transparent 0,
+    #000 8%,
+    #000 92%,
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    transparent 0,
+    #000 8%,
+    #000 92%,
+    transparent 100%
+  );
+}
+.marquee__track {
+  display: inline-flex;
+  align-items: center;
+  flex: 0 0 auto;
+  min-width: 100%;
+  animation: marquee linear infinite;
+}
+.marquee:hover .marquee__track {
+  animation-play-state: paused;
+}
+@keyframes marquee {
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+/* =========================================================
+   Magnetic + glow utilities
+   ========================================================= */
+.magnetic {
+  display: inline-flex;
+  position: relative;
+  transition: transform 250ms var(--ease-out-expo);
+  will-change: transform;
+}
+
+/* Italic display accent — uses italic + slight grey to introduce contrast without colour */
+.gradient-text {
+  font-style: italic;
+  font-weight: 600;
+  color: var(--color-ink);
+}
+
+.glass {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: saturate(180%) blur(16px);
+  -webkit-backdrop-filter: saturate(180%) blur(16px);
+}
+.glass-dark {
+  background: rgba(10, 10, 10, 0.6);
+  backdrop-filter: saturate(180%) blur(16px);
+  -webkit-backdrop-filter: saturate(180%) blur(16px);
+}
+
+/* Subtle noise overlay for premium feel */
+.noise::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.06 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.6;
+}
+
+/* =========================================================
+   Print
+   ========================================================= */
+@media print {
+  .cursor-dot,
+  .cursor-glow,
+  nav,
+  footer {
+    display: none !important;
+  }
 }

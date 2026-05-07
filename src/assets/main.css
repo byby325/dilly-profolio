@@ -6,36 +6,240 @@
 @tailwind components;
 @tailwind utilities;
 
-/* 基礎樣式覆蓋 */
+/* =========================================================
+   Layered base
+   ========================================================= */
 @layer base {
-  html, body {
-    @apply text-primary-900;
+  html,
+  body {
+    @apply text-primary-900 bg-white;
   }
-  
-  p, span, div, li, a {
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-display tracking-tight text-primary-900;
+    font-feature-settings: 'cv02', 'cv03', 'cv11';
+  }
+
+  p {
+    @apply text-primary-700 leading-relaxed;
+  }
+
+  a {
     @apply text-primary-900;
+    text-decoration-skip-ink: auto;
+  }
+
+  img {
+    -webkit-user-drag: none;
   }
 }
 
-/* 自定義組件樣式 */
+/* =========================================================
+   Component classes — SaaS look
+   ========================================================= */
 @layer components {
+  /* Buttons */
   .btn {
-    @apply px-6 py-2 rounded-md font-medium transition-colors;
+    @apply inline-flex items-center gap-2 px-5 py-2.5 rounded-full font-medium text-sm leading-none transition-all duration-300 ease-out-expo;
+    will-change: transform;
   }
-  
   .btn-primary {
-    @apply bg-accent text-white hover:bg-accent-hover;
+    @apply bg-primary-900 text-white shadow-card hover:bg-primary-950 hover:shadow-card-hover hover:-translate-y-0.5 active:translate-y-0;
   }
-  
+  .btn-accent {
+    @apply bg-primary-900 text-white shadow-card hover:bg-primary-950 hover:shadow-card-hover hover:-translate-y-0.5 active:translate-y-0;
+  }
   .btn-outline {
-    @apply border border-primary-300 hover:bg-primary-100 text-primary-800;
+    @apply border border-primary-200 bg-white/70 backdrop-blur text-primary-800 hover:border-primary-900 hover:text-primary-900 hover:-translate-y-0.5;
   }
-  
-  .section-title {
-    @apply text-2xl md:text-3xl font-bold mb-6;
+  .btn-ghost {
+    @apply text-primary-700 hover:text-primary-900 hover:bg-primary-100/60;
   }
-  
+  .btn-lg {
+    @apply px-7 py-3.5 text-base;
+  }
+
+  /* Eyebrow / pill */
+  .eyebrow {
+    @apply inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary-100 text-primary-700 text-xs font-medium tracking-wide uppercase;
+  }
+  .eyebrow-accent {
+    @apply inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary-900 text-white text-xs font-medium tracking-wide uppercase;
+  }
+  .eyebrow-dot::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 9999px;
+    background-color: currentColor;
+    display: inline-block;
+  }
+
+  /* Card */
   .card {
-    @apply bg-white rounded-lg shadow-md overflow-hidden;
+    @apply bg-white rounded-2xl border border-primary-100 shadow-soft transition-all duration-300 ease-out-expo;
+  }
+  .card-hover {
+    @apply hover:shadow-card-hover hover:-translate-y-0.5 hover:border-primary-200;
+  }
+  .card-flush {
+    @apply rounded-3xl overflow-hidden;
+  }
+
+  /* Tag chips */
+  .tag {
+    @apply inline-flex items-center px-2.5 py-1 rounded-full bg-primary-100 text-primary-700 text-xs font-medium;
+  }
+  .tag-soft {
+    @apply inline-flex items-center px-2.5 py-1 rounded-full bg-primary-50 text-primary-600 text-xs font-medium border border-primary-100;
+  }
+
+  /* Section title */
+  .section-eyebrow {
+    @apply inline-flex items-center gap-2 text-xs font-semibold tracking-[0.2em] uppercase text-primary-500;
+  }
+  .section-title {
+    @apply text-display-md text-primary-900;
+  }
+  .section-subtitle {
+    @apply text-base md:text-lg text-primary-600 max-w-2xl;
+  }
+
+  /* Section spacing */
+  .section {
+    padding-top: var(--section-gap);
+    padding-bottom: var(--section-gap);
+  }
+
+  /* Container shell */
+  .shell {
+    @apply max-w-[1320px] mx-auto px-4 md:px-8 lg:px-12;
+  }
+
+  /* Underlined link */
+  .link-underline {
+    @apply relative inline-flex items-center gap-1 font-medium text-primary-900;
+  }
+  .link-underline::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    height: 1px;
+    width: 100%;
+    background: currentColor;
+    transform-origin: right;
+    transform: scaleX(0);
+    transition: transform 400ms var(--ease-out-expo);
+  }
+  .link-underline:hover::after {
+    transform-origin: left;
+    transform: scaleX(1);
+  }
+
+  /* Aurora hero — neutral monochrome backdrop with subtle depth */
+  .aurora-bg {
+    position: relative;
+    background: var(--gradient-aurora), #ffffff;
+    isolation: isolate;
+  }
+  .aurora-bg::before {
+    content: '';
+    position: absolute;
+    inset: -10%;
+    background: var(--gradient-mesh);
+    filter: blur(80px);
+    z-index: -1;
+    opacity: 0.6;
+  }
+
+  /* Spotlight on hover (mouse-tracked) — uses currentColor to adapt to context */
+  .spotlight {
+    position: relative;
+    isolation: isolate;
+    --spotlight-color: rgba(15, 23, 42, 0.10);
+  }
+  .spotlight::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+      var(--cursor-glow) circle at var(--mx, 50%) var(--my, 50%),
+      var(--spotlight-color),
+      transparent 60%
+    );
+    opacity: 0;
+    transition: opacity 350ms var(--ease-out-expo);
+    pointer-events: none;
+    z-index: 0;
+    border-radius: inherit;
+  }
+  .spotlight:hover::before {
+    opacity: 1;
+  }
+  /* On dark surfaces, brighten the spotlight so it reads */
+  .bg-primary-900 .spotlight,
+  .bg-primary-950 .spotlight,
+  [class*='bg-primary-9'] .spotlight {
+    --spotlight-color: rgba(255, 255, 255, 0.10);
+  }
+
+  /* Image wrap (rounded with hover zoom + reveal mask) */
+  .img-wrap {
+    @apply relative overflow-hidden rounded-2xl bg-primary-100;
+  }
+  .img-wrap > img {
+    transition: transform 700ms var(--ease-out-expo),
+      filter 500ms var(--ease-out-expo);
+    will-change: transform;
+  }
+  .img-wrap:hover > img {
+    transform: scale(1.04);
+  }
+
+  /* Divider */
+  .hairline {
+    @apply h-px w-full bg-gradient-to-r from-transparent via-primary-200 to-transparent;
+  }
+
+  /* Anchor pills used as side nav */
+  .pill-nav-item {
+    @apply block py-1.5 px-3 rounded-full text-sm transition-colors duration-200;
+  }
+  .pill-nav-item.is-active {
+    @apply bg-primary-900 text-white;
+  }
+  .pill-nav-item:not(.is-active) {
+    @apply text-primary-500 hover:text-primary-900;
+  }
+}
+
+/* =========================================================
+   Utilities
+   ========================================================= */
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  .text-pretty {
+    text-wrap: pretty;
+  }
+  .ease-out-expo {
+    transition-timing-function: var(--ease-out-expo);
+  }
+  .ease-out-quint {
+    transition-timing-function: var(--ease-out-quint);
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
 }

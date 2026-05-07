@@ -1,134 +1,193 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue';
+import { onMounted, onUnmounted, ref } from 'vue'
 
-// 接收從父組件傳遞的導航項目
 const props = defineProps({
-    navItems: {
-        type: Array as () => { id: string; title: string }[],
-        required: true
-    },
-    // 控制導航欄在小屏幕上的顯示
-    showOnMobile: {
-        type: Boolean,
-        default: false
-    }
-});
+  navItems: {
+    type: Array as () => { id: string; title: string }[],
+    required: true,
+  },
+  showOnMobile: {
+    type: Boolean,
+    default: false,
+  },
+})
 
-// 當前活動的導航項目
-const activeItem = ref('');
+const activeItem = ref('')
+const mobileMenuOpen = ref(false)
+const isVisible = ref(true)
 
-// 是否顯示移動端導航菜單
-const mobileMenuOpen = ref(false);
+let lastScroll = 0
 
-// 計算 activeItem 的樣式
-const getItemStyle = (id: string) => {
-    return {
-        'font-bold': activeItem.value === id,
-        'text-coral-600': activeItem.value === id,
-        'text-gray-600': activeItem.value !== id,
-    };
-};
-
-// 滾動處理函數
 const handleScroll = () => {
-    const sections = props.navItems.map(item => document.getElementById(item.id));
-
-    // 找到當前滾動位置的section
-    for (let i = sections.length - 1; i >= 0; i--) {
-        const section = sections[i];
-        if (section) {
-            const rect = section.getBoundingClientRect();
-            // 如果section顶部在視窗頂部以下200px或以上位置，將其設為活動項
-            if (rect.top <= 200) {
-                activeItem.value = props.navItems[i].id;
-                break;
-            }
-        }
-    }
-
-    // 如果沒有找到任何活動項，默认設為第一個
-    if (!activeItem.value && props.navItems.length > 0) {
-        activeItem.value = props.navItems[0].id;
-    }
-};
-
-// 點擊導航項目時的處理函數
-const scrollToSection = (id: string) => {
-    const section = document.getElementById(id);
+  // Active section detection
+  const sections = props.navItems.map((item) => document.getElementById(item.id))
+  for (let i = sections.length - 1; i >= 0; i--) {
+    const section = sections[i]
     if (section) {
-        section.scrollIntoView({ behavior: 'smooth' });
-        activeItem.value = id;
-        mobileMenuOpen.value = false; // 點擊後關閉移動端菜單
+      const rect = section.getBoundingClientRect()
+      if (rect.top <= 200) {
+        activeItem.value = props.navItems[i].id
+        break
+      }
     }
-};
+  }
+  if (!activeItem.value && props.navItems.length > 0) {
+    activeItem.value = props.navItems[0].id
+  }
 
-// 切換移動端菜單
+  // Hide nav near footer
+  const doc = document.documentElement
+  const distanceToBottom = doc.scrollHeight - (window.scrollY + window.innerHeight)
+  isVisible.value = distanceToBottom > 280
+  lastScroll = window.scrollY
+}
+
+const scrollToSection = (id: string) => {
+  const section = document.getElementById(id)
+  if (section) {
+    const top = section.getBoundingClientRect().top + window.scrollY - 96
+    window.scrollTo({ top, behavior: 'smooth' })
+    activeItem.value = id
+    mobileMenuOpen.value = false
+  }
+}
+
 const toggleMobileMenu = () => {
-    mobileMenuOpen.value = !mobileMenuOpen.value;
-};
+  mobileMenuOpen.value = !mobileMenuOpen.value
+}
 
-// 組件掛載時添加滾動監聽
+const onKeyDown = (e: KeyboardEvent) => {
+  if (e.key === 'Escape') mobileMenuOpen.value = false
+}
+
 onMounted(() => {
-    handleScroll(); // 初始檢查
-    window.addEventListener('scroll', handleScroll, { passive: true });
-});
+  handleScroll()
+  window.addEventListener('scroll', handleScroll, { passive: true })
+  window.addEventListener('keydown', onKeyDown)
+})
 
-// 組件卸載時移除滾動監聽
 onUnmounted(() => {
-    window.removeEventListener('scroll', handleScroll);
-});
+  window.removeEventListener('scroll', handleScroll)
+  window.removeEventListener('keydown', onKeyDown)
+})
 </script>
 
 <template>
-    <!-- 桌面端側邊導航 (只在 xl 尺寸以上顯示) -->
-    <div class="hidden xl:block fixed right-8 top-1/3 transform -translate-y-1/2 z-50">
-        <div class="bg-white/80 backdrop-blur-sm rounded-lg shadow-lg p-4 border border-gray-200">
-            <ul class="space-y-3">
-                <li v-for="item in navItems" :key="item.id" class="transition-all duration-200">
-                    <a href="javascript:void(0)" @click="scrollToSection(item.id)"
-                        class="block py-1 px-2 hover:text-coral-600 transition-colors duration-200 text-sm"
-                        :class="getItemStyle(item.id)">
-                        {{ item.title }}
-                    </a>
-                </li>
-            </ul>
+  <!-- Desktop side rail -->
+  <Transition name="rail">
+    <aside
+      v-show="isVisible"
+      class="hidden xl:flex fixed right-6 top-1/2 -translate-y-1/2 z-40 flex-col"
+      aria-label="On-page navigation"
+    >
+      <nav class="glass rounded-2xl shadow-card border border-primary-100/80 px-3 py-3 max-w-[260px]">
+        <div class="text-[10px] font-semibold tracking-[0.2em] uppercase text-primary-400 px-3 pt-1 pb-2">
+          On this page
         </div>
-    </div>
+        <ul class="space-y-0.5">
+          <li v-for="item in navItems" :key="item.id">
+            <button
+              type="button"
+              class="pill-nav-item w-full text-left flex items-center gap-2"
+              :class="{ 'is-active': activeItem === item.id }"
+              @click="scrollToSection(item.id)"
+            >
+              <span
+                class="inline-block w-1.5 h-1.5 rounded-full transition-colors"
+                :class="activeItem === item.id ? 'bg-white' : 'bg-primary-300'"
+                aria-hidden="true"
+              />
+              {{ item.title }}
+            </button>
+          </li>
+        </ul>
+      </nav>
+    </aside>
+  </Transition>
 
-    <!-- 移動端導航 (從 xs 到 lg 尺寸顯示) -->
-    <div class="block xl:hidden fixed right-4 bottom-6 z-50" v-if="showOnMobile">
-        <!-- 移動端菜單按鈕 -->
-        <button @click="toggleMobileMenu"
-            class="bg-coral-500 text-white rounded-full w-12 h-12 flex items-center justify-center shadow-lg hover:bg-coral-600 transition-colors">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                stroke="currentColor">
-                <path v-if="!mobileMenuOpen" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M4 6h16M4 12h16M4 18h16" />
-                <path v-else stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-            </svg>
-        </button>
+  <!-- Mobile floating button + sheet -->
+  <div v-if="showOnMobile" class="block xl:hidden fixed right-4 bottom-6 z-40">
+    <button
+      type="button"
+      class="w-12 h-12 inline-flex items-center justify-center rounded-full bg-primary-900 text-white shadow-card-hover transition-transform duration-300 ease-out-expo hover:scale-105"
+      :aria-expanded="mobileMenuOpen"
+      aria-label="Toggle on-page navigation"
+      @click="toggleMobileMenu"
+    >
+      <svg
+        v-if="!mobileMenuOpen"
+        xmlns="http://www.w3.org/2000/svg"
+        class="h-5 w-5"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <line x1="3" y1="6" x2="21" y2="6" />
+        <line x1="3" y1="12" x2="21" y2="12" />
+        <line x1="3" y1="18" x2="14" y2="18" />
+      </svg>
+      <svg
+        v-else
+        xmlns="http://www.w3.org/2000/svg"
+        class="h-5 w-5"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="M6 6 18 18M6 18 18 6" />
+      </svg>
+    </button>
 
-        <!-- 移動端菜單內容 -->
-        <div v-if="mobileMenuOpen"
-            class="absolute bottom-16 right-0 bg-white rounded-lg shadow-lg p-4 min-w-[200px] border border-gray-200">
-            <ul class="space-y-3">
-                <li v-for="item in navItems" :key="item.id">
-                    <a href="javascript:void(0)" @click="scrollToSection(item.id)"
-                        class="block py-1 px-2 hover:text-coral-600 transition-colors duration-200 text-sm"
-                        :class="getItemStyle(item.id)">
-                        {{ item.title }}
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </div>
+    <Transition name="sheet">
+      <div
+        v-if="mobileMenuOpen"
+        class="absolute bottom-16 right-0 min-w-[220px] glass rounded-2xl shadow-card-hover border border-primary-100/80 p-2"
+        role="dialog"
+        aria-modal="true"
+      >
+        <ul class="space-y-0.5">
+          <li v-for="item in navItems" :key="item.id">
+            <button
+              type="button"
+              class="pill-nav-item w-full text-left"
+              :class="{ 'is-active': activeItem === item.id }"
+              @click="scrollToSection(item.id)"
+            >
+              {{ item.title }}
+            </button>
+          </li>
+        </ul>
+      </div>
+    </Transition>
+  </div>
 </template>
 
 <style scoped>
-/* 添加過渡動畫 */
-.transition-all {
-    transition-property: all;
-    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-    transition-duration: 150ms;
+.rail-enter-active,
+.rail-leave-active {
+  transition: opacity 300ms var(--ease-out-expo),
+    transform 300ms var(--ease-out-expo);
+}
+.rail-enter-from,
+.rail-leave-to {
+  opacity: 0;
+  transform: translate(8px, -50%);
+}
+
+.sheet-enter-active,
+.sheet-leave-active {
+  transition: opacity 250ms var(--ease-out-expo),
+    transform 250ms var(--ease-out-expo);
+}
+.sheet-enter-from,
+.sheet-leave-to {
+  opacity: 0;
+  transform: translateY(8px);
 }
 </style>

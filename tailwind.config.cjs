@@ -1,13 +1,10 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: [
-    "./index.html",
-    "./src/**/*.{vue,js,ts,jsx,tsx}",
-  ],
+  content: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
   theme: {
     extend: {
       colors: {
-        // 主色調 - 黑白灰
+        // 主色調 - 黑白灰 (zinc-based, with denser low-end for SaaS surfaces)
         primary: {
           50: '#fafafa',
           100: '#f4f4f5',
@@ -21,23 +18,31 @@ module.exports = {
           900: '#18181b',
           950: '#09090b',
         },
-        // 強調色 - 用於按鈕、連結等互動元素
+        // SaaS 主互動色 — indigo 系 (比原本的 blue 更現代、更有產品感)
         accent: {
-          DEFAULT: '#2563eb', // 藍色
-          hover: '#1d4ed8',
-          50: '#eff6ff',
-          100: '#dbeafe',
-          200: '#bfdbfe',
-          300: '#93c5fd',
-          400: '#60a5fa',
-          500: '#3b82f6',
-          600: '#2563eb',
-          700: '#1d4ed8',
-          800: '#1e40af',
-          900: '#1e3a8a',
-          950: '#172554',
+          DEFAULT: '#4f46e5',
+          hover: '#4338ca',
+          50: '#eef2ff',
+          100: '#e0e7ff',
+          200: '#c7d2fe',
+          300: '#a5b4fc',
+          400: '#818cf8',
+          500: '#6366f1',
+          600: '#4f46e5',
+          700: '#4338ca',
+          800: '#3730a3',
+          900: '#312e81',
+          950: '#1e1b4b',
         },
-        // 成功、錯誤等狀態色彩
+        // 表面色階 — 用於 SaaS 卡片 / surface
+        surface: {
+          DEFAULT: '#ffffff',
+          1: '#ffffff',
+          2: '#fafafa',
+          3: '#f4f4f5',
+          ink: '#0a0a0a',
+          inkSoft: '#171717',
+        },
         success: {
           DEFAULT: '#10b981',
           50: '#ecfdf5',
@@ -80,7 +85,6 @@ module.exports = {
           900: '#78350f',
           950: '#451a03',
         },
-        // 新增補充色系
         purple: {
           DEFAULT: '#8b5cf6',
           50: '#faf5ff',
@@ -123,7 +127,6 @@ module.exports = {
           900: '#881337',
           950: '#4c0519',
         },
-        // 新增暖色系
         amber: {
           DEFAULT: '#f59e0b',
           50: '#fffbeb',
@@ -212,25 +215,111 @@ module.exports = {
       },
       fontFamily: {
         sans: [
-          'Inter', 
-          'system-ui', 
-          '-apple-system', 
-          'BlinkMacSystemFont', 
-          '"Segoe UI"', 
-          'Roboto', 
-          '"Helvetica Neue"', 
-          'Arial', 
-          'sans-serif'
+          'Inter var',
+          'Inter',
+          'system-ui',
+          '-apple-system',
+          'BlinkMacSystemFont',
+          '"Segoe UI"',
+          'Roboto',
+          '"Helvetica Neue"',
+          'Arial',
+          'sans-serif',
+        ],
+        display: [
+          '"Inter var"',
+          'Inter',
+          'system-ui',
+          '-apple-system',
+          'sans-serif',
         ],
         mono: [
-          'JetBrains Mono',
+          '"JetBrains Mono"',
           'Menlo',
           'Monaco',
           'Consolas',
           '"Liberation Mono"',
           '"Courier New"',
-          'monospace'
+          'monospace',
         ],
+      },
+      // SaaS 風格的字型階層 — 採用 fluid typography
+      fontSize: {
+        'display-2xl': ['clamp(3.5rem, 7vw + 1rem, 7.5rem)', { lineHeight: '1', letterSpacing: '-0.04em', fontWeight: '700' }],
+        'display-xl': ['clamp(2.75rem, 5vw + 1rem, 5.25rem)', { lineHeight: '1.05', letterSpacing: '-0.035em', fontWeight: '700' }],
+        'display-lg': ['clamp(2.25rem, 3.6vw + 1rem, 4rem)', { lineHeight: '1.1', letterSpacing: '-0.03em', fontWeight: '700' }],
+        'display-md': ['clamp(1.875rem, 2.4vw + 1rem, 3rem)', { lineHeight: '1.15', letterSpacing: '-0.025em', fontWeight: '700' }],
+        'display-sm': ['clamp(1.5rem, 1.6vw + 0.875rem, 2.25rem)', { lineHeight: '1.2', letterSpacing: '-0.02em', fontWeight: '600' }],
+      },
+      // SaaS 卡片陰影 — 比 Tailwind 預設更柔、層次更分明
+      boxShadow: {
+        soft: '0 1px 2px 0 rgba(15, 23, 42, 0.04), 0 1px 3px 0 rgba(15, 23, 42, 0.06)',
+        card: '0 4px 12px -2px rgba(15, 23, 42, 0.06), 0 2px 6px -2px rgba(15, 23, 42, 0.04)',
+        'card-hover': '0 24px 48px -16px rgba(15, 23, 42, 0.16), 0 8px 16px -8px rgba(15, 23, 42, 0.08)',
+        elevated: '0 32px 64px -24px rgba(15, 23, 42, 0.24), 0 12px 24px -12px rgba(15, 23, 42, 0.12)',
+        ring: '0 0 0 1px rgba(15, 23, 42, 0.06), 0 1px 3px 0 rgba(15, 23, 42, 0.05)',
+        glow: '0 0 0 1px rgba(79, 70, 229, 0.18), 0 12px 32px -8px rgba(79, 70, 229, 0.32)',
+      },
+      borderRadius: {
+        '4xl': '2rem',
+        '5xl': '2.5rem',
+      },
+      transitionTimingFunction: {
+        // 統一的 easing — Out Quint 與 Out Expo
+        'out-expo': 'cubic-bezier(0.16, 1, 0.3, 1)',
+        'out-quint': 'cubic-bezier(0.22, 1, 0.36, 1)',
+        'in-out-quint': 'cubic-bezier(0.83, 0, 0.17, 1)',
+        spring: 'cubic-bezier(0.5, -0.5, 0.1, 1.5)',
+      },
+      transitionDuration: {
+        250: '250ms',
+        350: '350ms',
+        450: '450ms',
+        600: '600ms',
+        800: '800ms',
+        1200: '1200ms',
+      },
+      keyframes: {
+        'fade-in-up': {
+          '0%': { opacity: '0', transform: 'translateY(24px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
+        'fade-in': {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' },
+        },
+        'scale-in': {
+          '0%': { opacity: '0', transform: 'scale(0.96)' },
+          '100%': { opacity: '1', transform: 'scale(1)' },
+        },
+        'shimmer': {
+          '0%': { transform: 'translateX(-100%)' },
+          '100%': { transform: 'translateX(100%)' },
+        },
+        'pulse-soft': {
+          '0%, 100%': { opacity: '1' },
+          '50%': { opacity: '0.6' },
+        },
+        'gradient-shift': {
+          '0%, 100%': { backgroundPosition: '0% 50%' },
+          '50%': { backgroundPosition: '100% 50%' },
+        },
+        'orbit': {
+          '0%': { transform: 'rotate(0deg) translateX(120px) rotate(0deg)' },
+          '100%': { transform: 'rotate(360deg) translateX(120px) rotate(-360deg)' },
+        },
+      },
+      animation: {
+        'fade-in-up': 'fade-in-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) both',
+        'fade-in': 'fade-in 0.6s ease-out both',
+        'scale-in': 'scale-in 0.5s cubic-bezier(0.16, 1, 0.3, 1) both',
+        'shimmer': 'shimmer 2s linear infinite',
+        'pulse-soft': 'pulse-soft 3s ease-in-out infinite',
+        'gradient-shift': 'gradient-shift 8s ease infinite',
+        'orbit-slow': 'orbit 18s linear infinite',
+      },
+      backdropBlur: {
+        xs: '2px',
       },
       typography: {
         DEFAULT: {
@@ -243,4 +332,3 @@ module.exports = {
   },
   plugins: [],
 }
-

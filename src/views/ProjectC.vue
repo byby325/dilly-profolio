@@ -1,124 +1,75 @@
 <script setup lang="ts">
-  import { RouterLink } from 'vue-router'
+import { RouterLink } from 'vue-router'
 </script>
 
 <template>
-  <div class="max-w-4xl mx-auto py-20">
-    <h1 class="text-5xl font-bold mb-4">Project C - IOTION</h1>
-    <p class="text-xl text-gray-400 mb-12">App Design & Development</p>
+  <div class="bg-white">
+    <section class="aurora-bg pt-12 md:pt-16 pb-16 md:pb-24">
+      <div class="shell">
+        <div v-reveal class="mb-6">
+          <RouterLink
+            to="/#selected-projects"
+            class="inline-flex items-center gap-1.5 text-sm text-primary-500 hover:text-primary-900 transition-colors"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5" /><path d="m12 19-7-7 7-7" /></svg>
+            All projects
+          </RouterLink>
+        </div>
 
-    <div class="bg-gray-800 h-72 w-full rounded-lg mb-16"></div>
+        <div v-reveal class="max-w-4xl">
+          <span class="eyebrow eyebrow-accent eyebrow-dot mb-4">Dating App · Research-led</span>
+          <h1 class="text-display-xl font-display tracking-tight">IOTION</h1>
+          <p class="text-lg md:text-xl text-primary-600 mt-4">交友 APP — 從問卷與訪談切入，創造輕鬆自然的社交連結。</p>
+        </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16">
-      <div>
-        <h3 class="text-xl font-medium mb-4">Role</h3>
-        <p class="text-gray-400">Product Designer & Frontend Developer</p>
+        <div v-reveal.stagger class="mt-12 grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
+          <div class="border-l-2 border-primary-200 pl-4">
+            <div class="text-[11px] uppercase tracking-[0.2em] text-primary-500 mb-1">Role</div>
+            <p class="text-primary-900 font-medium">UX · UI · Research</p>
+          </div>
+          <div class="border-l-2 border-primary-200 pl-4">
+            <div class="text-[11px] uppercase tracking-[0.2em] text-primary-500 mb-1">Timeline</div>
+            <p class="text-primary-900 font-medium">2022 — 2023</p>
+          </div>
+          <div class="border-l-2 border-primary-200 pl-4">
+            <div class="text-[11px] uppercase tracking-[0.2em] text-primary-500 mb-1">Tools</div>
+            <p class="text-primary-900 font-medium">Figma · Notion</p>
+          </div>
+          <div class="border-l-2 border-primary-200 pl-4">
+            <div class="text-[11px] uppercase tracking-[0.2em] text-primary-500 mb-1">Status</div>
+            <p class="text-primary-900 font-medium">Case study coming</p>
+          </div>
+        </div>
       </div>
+    </section>
 
-      <div>
-        <h3 class="text-xl font-medium mb-4">Timeline</h3>
-        <p class="text-gray-400">6 months (2022-2023)</p>
+    <section class="py-16 md:py-24">
+      <div class="shell max-w-4xl">
+        <div v-reveal class="card p-8 md:p-12 text-center">
+          <span class="inline-flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-primary-500 mb-4">
+            <span class="inline-block w-1.5 h-1.5 rounded-full bg-primary-900 animate-pulse-soft" />
+            In progress
+          </span>
+          <h2 class="text-2xl md:text-3xl font-display font-semibold mb-3">Case study coming soon</h2>
+          <p class="text-primary-600 max-w-xl mx-auto">
+            I'm currently writing up the research, problem framing, and interaction design
+            decisions behind IOTION. Reach out if you'd like an early walkthrough.
+          </p>
+          <div class="mt-6 inline-flex flex-wrap gap-3 justify-center">
+            <a href="mailto:byby325@gmail.com" class="btn btn-primary" v-magnetic="0.3">Email me →</a>
+            <RouterLink to="/" class="btn btn-outline">Browse other work</RouterLink>
+          </div>
+        </div>
+
+        <nav class="mt-12 flex items-center justify-between text-sm">
+          <RouterLink to="/project/firefoxlite" class="link-underline text-primary-700">
+            ← Firefox Lite
+          </RouterLink>
+          <RouterLink to="/project/blossom" class="link-underline text-primary-700">
+            Blossom →
+          </RouterLink>
+        </nav>
       </div>
-
-      <div>
-        <h3 class="text-xl font-medium mb-4">Tools</h3>
-        <p class="text-gray-400">Figma, React Native, Firebase</p>
-      </div>
-    </div>
-
-    <div class="mb-16">
-      <h2 class="text-3xl font-semibold mb-6">Overview</h2>
-      <p class="text-lg text-gray-400 mb-4">
-        IOTION is a productivity mobile application that combines note-taking, task management, and
-        habit tracking in a single integrated platform. The project aimed to create a seamless
-        experience for users to organize their personal and professional lives.
-      </p>
-      <p class="text-lg text-gray-400">
-        I was responsible for designing the user experience and interface, as well as implementing
-        the frontend using React Native. The application was designed with a focus on simplicity and
-        powerful customization options.
-      </p>
-    </div>
-
-    <div class="mb-16">
-      <h2 class="text-3xl font-semibold mb-6">Challenge</h2>
-      <p class="text-lg text-gray-400">
-        The main challenge was creating a unified interface that seamlessly integrated multiple
-        productivity features without overwhelming users. Additionally, ensuring consistent
-        performance across both iOS and Android platforms while maintaining a native feel required
-        careful consideration of platform-specific design patterns.
-      </p>
-    </div>
-
-    <div class="mb-16">
-      <h2 class="text-3xl font-semibold mb-6">Process</h2>
-
-      <div class="mb-8">
-        <h3 class="text-2xl font-medium mb-4">1. User Research & Problem Definition</h3>
-        <div class="bg-gray-800 h-56 w-full rounded-lg mb-4"></div>
-        <p class="text-lg text-gray-400">
-          Conducted surveys and interviews with target users to understand their productivity
-          challenges and current tool usage patterns.
-        </p>
-      </div>
-
-      <div class="mb-8">
-        <h3 class="text-2xl font-medium mb-4">2. Ideation & Concept Development</h3>
-        <div class="bg-gray-800 h-56 w-full rounded-lg mb-4"></div>
-        <p class="text-lg text-gray-400">
-          Created user personas, journey maps, and key scenarios to guide the design process and
-          identify core features.
-        </p>
-      </div>
-
-      <div class="mb-8">
-        <h3 class="text-2xl font-medium mb-4">3. UI Design & Prototyping</h3>
-        <div class="bg-gray-800 h-56 w-full rounded-lg mb-4"></div>
-        <p class="text-lg text-gray-400">
-          Designed the user interface with a focus on minimalism and accessibility, creating
-          interactive prototypes for user testing.
-        </p>
-      </div>
-
-      <div>
-        <h3 class="text-2xl font-medium mb-4">4. Development & Iteration</h3>
-        <div class="bg-gray-800 h-56 w-full rounded-lg mb-4"></div>
-        <p class="text-lg text-gray-400">
-          Implemented the frontend using React Native, conducting regular user testing and iterating
-          on the design based on feedback.
-        </p>
-      </div>
-    </div>
-
-    <div class="mb-16">
-      <h2 class="text-3xl font-semibold mb-6">Results</h2>
-      <p class="text-lg text-gray-400 mb-4">
-        IOTION was successfully launched on both iOS and Android platforms, quickly gaining a
-        dedicated user base of over 50,000 within the first three months. The app received positive
-        reviews for its intuitive interface and seamless integration of productivity features.
-      </p>
-      <p class="text-lg text-gray-400">
-        Key metrics showed strong user engagement, with an average of 5 sessions per week per user
-        and a retention rate of 65% after 30 days.
-      </p>
-    </div>
-
-    <div class="mb-16">
-      <h2 class="text-3xl font-semibold mb-6">Takeaways</h2>
-      <p class="text-lg text-gray-400">
-        This project reinforced the importance of focused user research and iterative design in
-        creating successful digital products. It also provided valuable insights into cross-platform
-        development challenges and the balance between feature richness and interface simplicity.
-      </p>
-    </div>
-
-    <div class="flex justify-between items-center pt-8 border-t border-gray-800">
-      <RouterLink to="/project-b" class="text-gray-400 hover:text-white transition"
-        >← Previous Project</RouterLink
-      >
-      <RouterLink to="/project-d" class="text-gray-400 hover:text-white transition"
-        >Next Project →</RouterLink
-      >
-    </div>
+    </section>
   </div>
 </template>

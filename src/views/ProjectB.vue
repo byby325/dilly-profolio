@@ -1,122 +1,77 @@
 <script setup lang="ts">
-  import { RouterLink } from 'vue-router'
+import { RouterLink } from 'vue-router'
 </script>
 
 <template>
-  <div class="max-w-4xl mx-auto py-20">
-    <h1 class="text-5xl font-bold mb-4">Project B - FirefoxLite</h1>
-    <p class="text-xl text-gray-400 mb-12">UI/UX Design & Research</p>
+  <div class="bg-white">
+    <!-- Hero -->
+    <section class="aurora-bg pt-12 md:pt-16 pb-16 md:pb-24">
+      <div class="shell">
+        <div v-reveal class="mb-6">
+          <RouterLink
+            to="/#selected-projects"
+            class="inline-flex items-center gap-1.5 text-sm text-primary-500 hover:text-primary-900 transition-colors"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5" /><path d="m12 19-7-7 7-7" /></svg>
+            All projects
+          </RouterLink>
+        </div>
 
-    <div class="bg-gray-800 h-72 w-full rounded-lg mb-16"></div>
+        <div v-reveal class="max-w-4xl">
+          <span class="eyebrow eyebrow-accent eyebrow-dot mb-4">Browser Redesign · Mozilla Campus</span>
+          <h1 class="text-display-xl font-display tracking-tight">Firefox Lite Browser Feature</h1>
+          <p class="text-lg md:text-xl text-primary-600 mt-4">Reader Mode &amp; Share Function — UI/UX redesign that improves cross-device consistency for a lightweight browser.</p>
+        </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16">
-      <div>
-        <h3 class="text-xl font-medium mb-4">Role</h3>
-        <p class="text-gray-400">UX Designer & Researcher</p>
+        <div v-reveal.stagger class="mt-12 grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
+          <div class="border-l-2 border-primary-200 pl-4">
+            <div class="text-[11px] uppercase tracking-[0.2em] text-primary-500 mb-1">Role</div>
+            <p class="text-primary-900 font-medium">UX Designer · Researcher</p>
+          </div>
+          <div class="border-l-2 border-primary-200 pl-4">
+            <div class="text-[11px] uppercase tracking-[0.2em] text-primary-500 mb-1">Timeline</div>
+            <p class="text-primary-900 font-medium">4 months · 2022</p>
+          </div>
+          <div class="border-l-2 border-primary-200 pl-4">
+            <div class="text-[11px] uppercase tracking-[0.2em] text-primary-500 mb-1">Tools</div>
+            <p class="text-primary-900 font-medium">Figma · Adobe XD</p>
+          </div>
+          <div class="border-l-2 border-primary-200 pl-4">
+            <div class="text-[11px] uppercase tracking-[0.2em] text-primary-500 mb-1">Status</div>
+            <p class="text-primary-900 font-medium">Case study coming</p>
+          </div>
+        </div>
       </div>
+    </section>
 
-      <div>
-        <h3 class="text-xl font-medium mb-4">Timeline</h3>
-        <p class="text-gray-400">4 months (2022)</p>
+    <!-- Body -->
+    <section class="py-16 md:py-24">
+      <div class="shell max-w-4xl">
+        <div v-reveal class="card p-8 md:p-12 text-center">
+          <span class="inline-flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-primary-500 mb-4">
+            <span class="inline-block w-1.5 h-1.5 rounded-full bg-primary-900 animate-pulse-soft" />
+            In progress
+          </span>
+          <h2 class="text-2xl md:text-3xl font-display font-semibold mb-3">Case study coming soon</h2>
+          <p class="text-primary-600 max-w-xl mx-auto">
+            I'm reworking this case study with updated visuals and learnings.
+            Want a sneak peek? Drop me a note and I'll happily share the slides.
+          </p>
+          <div class="mt-6 inline-flex flex-wrap gap-3 justify-center">
+            <a href="mailto:byby325@gmail.com" class="btn btn-primary" v-magnetic="0.3">Email me →</a>
+            <RouterLink to="/" class="btn btn-outline">Browse other work</RouterLink>
+          </div>
+        </div>
+
+        <nav class="mt-12 flex items-center justify-between text-sm">
+          <RouterLink to="/project/moodzine" class="link-underline text-primary-700">
+            ← MOODZiNE
+          </RouterLink>
+          <RouterLink to="/project/iotion" class="link-underline text-primary-700">
+            IOTION →
+          </RouterLink>
+        </nav>
       </div>
-
-      <div>
-        <h3 class="text-xl font-medium mb-4">Tools</h3>
-        <p class="text-gray-400">Figma, Adobe XD, InVision</p>
-      </div>
-    </div>
-
-    <div class="mb-16">
-      <h2 class="text-3xl font-semibold mb-6">Overview</h2>
-      <p class="text-lg text-gray-400 mb-4">
-        FirefoxLite is a lightweight browser alternative designed for emerging markets with limited
-        data connectivity and lower-end devices. The project focused on optimizing user experience
-        while minimizing resource usage.
-      </p>
-      <p class="text-lg text-gray-400">
-        I led the UX design and research efforts, working closely with the development team to
-        identify user needs and design solutions that balanced performance with usability.
-      </p>
-    </div>
-
-    <div class="mb-16">
-      <h2 class="text-3xl font-semibold mb-6">Challenge</h2>
-      <p class="text-lg text-gray-400">
-        The primary challenge was to create a browsing experience that maintained essential
-        functionality while significantly reducing data consumption and memory usage. Additionally,
-        the interface needed to be intuitive for users with varying levels of technical literacy.
-      </p>
-    </div>
-
-    <div class="mb-16">
-      <h2 class="text-3xl font-semibold mb-6">Process</h2>
-
-      <div class="mb-8">
-        <h3 class="text-2xl font-medium mb-4">1. User Research</h3>
-        <div class="bg-gray-800 h-56 w-full rounded-lg mb-4"></div>
-        <p class="text-lg text-gray-400">
-          Conducted field studies and interviews with users in target markets to understand their
-          browsing habits, pain points, and device constraints.
-        </p>
-      </div>
-
-      <div class="mb-8">
-        <h3 class="text-2xl font-medium mb-4">2. Competitive Analysis</h3>
-        <div class="bg-gray-800 h-56 w-full rounded-lg mb-4"></div>
-        <p class="text-lg text-gray-400">
-          Analyzed existing lightweight browsers to identify best practices and opportunities for
-          innovation.
-        </p>
-      </div>
-
-      <div class="mb-8">
-        <h3 class="text-2xl font-medium mb-4">3. Wireframing & Prototyping</h3>
-        <div class="bg-gray-800 h-56 w-full rounded-lg mb-4"></div>
-        <p class="text-lg text-gray-400">
-          Created low-fidelity wireframes and interactive prototypes to test core functionality and
-          navigation concepts.
-        </p>
-      </div>
-
-      <div>
-        <h3 class="text-2xl font-medium mb-4">4. Usability Testing & Iteration</h3>
-        <div class="bg-gray-800 h-56 w-full rounded-lg mb-4"></div>
-        <p class="text-lg text-gray-400">
-          Conducted multiple rounds of usability testing with target users, iterating on the design
-          based on feedback.
-        </p>
-      </div>
-    </div>
-
-    <div class="mb-16">
-      <h2 class="text-3xl font-semibold mb-6">Results</h2>
-      <p class="text-lg text-gray-400 mb-4">
-        The redesigned FirefoxLite browser achieved a 40% reduction in data usage and 30% decrease
-        in memory consumption compared to standard browsers, while maintaining core functionality.
-      </p>
-      <p class="text-lg text-gray-400">
-        User adoption exceeded targets by 25% in the first quarter after launch, with particularly
-        strong growth in regions with limited connectivity.
-      </p>
-    </div>
-
-    <div class="mb-16">
-      <h2 class="text-3xl font-semibold mb-6">Takeaways</h2>
-      <p class="text-lg text-gray-400">
-        This project emphasized the importance of understanding specific user contexts and
-        technological constraints when designing digital products. It also highlighted how
-        thoughtful feature prioritization can create meaningful experiences even with significant
-        technical limitations.
-      </p>
-    </div>
-
-    <div class="flex justify-between items-center pt-8 border-t border-gray-800">
-      <RouterLink to="/project-a" class="text-gray-400 hover:text-white transition"
-        >← Previous Project</RouterLink
-      >
-      <RouterLink to="/project-c" class="text-gray-400 hover:text-white transition"
-        >Next Project →</RouterLink
-      >
-    </div>
+    </section>
   </div>
 </template>
