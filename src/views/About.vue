@@ -145,11 +145,11 @@ const besides = Array.from({ length: 6 }, (_, i) => ({
           </div>
           <div class="flex flex-wrap gap-3 mt-8">
             <a
+              v-magnetic="0.3"
               href="https://www.linkedin.com/in/dilly-chen/"
               target="_blank"
               rel="noopener noreferrer"
               class="btn btn-lg btn-primary"
-              v-magnetic="0.3"
             >
               LinkedIn
               <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7" /><path d="M7 7h10v10" /></svg>
@@ -208,8 +208,8 @@ const besides = Array.from({ length: 6 }, (_, i) => ({
               <div
                 v-for="tool in tools"
                 :key="tool.name"
-                class="group flex flex-col items-center gap-2"
                 v-spotlight
+                class="group flex flex-col items-center gap-2"
                 data-cursor-hover
               >
                 <div class="w-14 h-14 md:w-16 md:h-16 flex items-center justify-center rounded-2xl bg-white border border-primary-100 shadow-soft transition-all duration-300 ease-out-expo group-hover:-translate-y-1 group-hover:shadow-card">
@@ -358,8 +358,8 @@ const besides = Array.from({ length: 6 }, (_, i) => ({
           <article
             v-for="(t, i) in talks"
             :key="i"
-            class="card card-hover overflow-hidden flex flex-col"
             v-spotlight
+            class="card card-hover overflow-hidden flex flex-col"
             data-cursor-hover
           >
             <div class="img-wrap aspect-[16/9] rounded-none">
@@ -413,8 +413,8 @@ const besides = Array.from({ length: 6 }, (_, i) => ({
           <div
             v-for="(b, i) in besides"
             :key="i"
-            class="img-wrap aspect-[3/2]"
             v-spotlight
+            class="img-wrap aspect-[3/2]"
             data-cursor-hover
           >
             <img

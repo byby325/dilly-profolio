@@ -111,11 +111,11 @@ const navClasses = computed(() => [
         <!-- CTA -->
         <div class="hidden md:flex items-center gap-2">
           <a
+            v-magnetic="0.25"
             href="https://www.linkedin.com/in/dilly-chen/"
             target="_blank"
             rel="noopener noreferrer"
             class="btn btn-primary"
-            v-magnetic="0.25"
           >
             Let's talk
             <svg

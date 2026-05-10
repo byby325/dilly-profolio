@@ -222,8 +222,8 @@ const difficultyTone = (d: Tool['difficulty']) => {
           <article
             v-for="tool in filteredTools"
             :key="tool.id"
-            class="card card-hover p-6 md:p-7 flex flex-col"
             v-spotlight
+            class="card card-hover p-6 md:p-7 flex flex-col"
             data-cursor-hover
           >
             <div class="flex items-start justify-between gap-3 mb-2">

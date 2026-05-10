@@ -297,7 +297,7 @@ onUnmounted(() => {
 
           <!-- CTAs -->
           <div v-reveal.stagger class="flex flex-wrap gap-3 mt-10">
-            <RouterLink to="/about" class="btn btn-lg btn-primary group" v-magnetic="0.3">
+            <RouterLink v-magnetic="0.3" to="/about" class="btn btn-lg btn-primary group">
               About me
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -313,9 +313,9 @@ onUnmounted(() => {
               </svg>
             </RouterLink>
             <a
+              v-magnetic="0.3"
               href="#selected-projects"
               class="btn btn-lg btn-outline group"
-              v-magnetic="0.3"
             >
               See the work
               <svg
@@ -405,8 +405,8 @@ onUnmounted(() => {
             v-for="(p, idx) in projects"
             :key="p.id"
             v-reveal
-            class="group relative rounded-3xl border border-white/10 bg-white/[0.03] backdrop-blur overflow-hidden transition-all duration-500 ease-out-expo hover:border-white/30 hover:bg-white/[0.06]"
             v-spotlight
+            class="group relative rounded-3xl border border-white/10 bg-white/[0.03] backdrop-blur overflow-hidden transition-all duration-500 ease-out-expo hover:border-white/30 hover:bg-white/[0.06]"
             data-cursor-hover
           >
             <div class="grid grid-cols-1 md:grid-cols-12 gap-0 md:gap-8 items-stretch">
@@ -512,10 +512,10 @@ onUnmounted(() => {
           <button
             v-for="tile in tiles"
             :key="tile.name"
-            type="button"
-            class="card-flush card group relative aspect-[3/2] cursor-pointer text-left overflow-hidden"
             v-reveal
             v-spotlight
+            type="button"
+            class="card-flush card group relative aspect-[3/2] cursor-pointer text-left overflow-hidden"
             data-cursor-hover
             @click="showUIDetails(tile)"
           >
@@ -619,8 +619,8 @@ onUnmounted(() => {
           <div
             v-for="(src, i) in visualImages"
             :key="src"
-            class="img-wrap aspect-[4/3]"
             v-spotlight
+            class="img-wrap aspect-[4/3]"
             data-cursor-hover
           >
             <img

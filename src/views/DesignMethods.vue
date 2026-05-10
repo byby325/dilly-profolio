@@ -76,9 +76,9 @@ const popular = [
           <RouterLink
             v-for="p in phases"
             :key="p.num"
+            v-spotlight
             :to="p.to"
             class="group card card-hover p-7 md:p-8 flex flex-col"
-            v-spotlight
             data-cursor-hover
           >
             <div class="flex items-baseline justify-between mb-6">
@@ -182,8 +182,8 @@ const popular = [
           <div
             v-for="t in popular"
             :key="t.title"
-            class="rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur p-5 transition-all duration-300 ease-out-expo hover:border-white/30 hover:bg-white/[0.06] cursor-pointer"
             v-spotlight
+            class="rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur p-5 transition-all duration-300 ease-out-expo hover:border-white/30 hover:bg-white/[0.06] cursor-pointer"
             data-cursor-hover
           >
             <h3 class="font-display font-semibold text-white">{{ t.title }}</h3>

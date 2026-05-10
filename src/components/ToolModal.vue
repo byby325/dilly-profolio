@@ -22,7 +22,7 @@
               </span>
             </div>
           </div>
-          <button @click="closeModal" class="text-gray-400 hover:text-gray-600 transition-colors">
+          <button class="text-gray-400 hover:text-gray-600 transition-colors" @click="closeModal">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
             </svg>
@@ -110,12 +110,12 @@
             點擊相關工具可查看更多資訊
           </div>
           <button 
-            @click="closeModal"
             :class="[
               'px-6 py-2 rounded-lg font-medium transition-colors',
               phaseColors[tool?.phase || 'inspiration'].accent,
               'text-white hover:opacity-90'
             ]"
+            @click="closeModal"
           >
             關閉
           </button>

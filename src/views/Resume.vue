@@ -95,19 +95,19 @@ const skills = {
         </div>
         <div v-reveal class="flex flex-wrap gap-3">
           <a
+            v-magnetic="0.3"
             href="mailto:byby325@gmail.com"
             class="btn btn-lg btn-primary"
-            v-magnetic="0.3"
           >
             Email
             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
           </a>
           <a
+            v-magnetic="0.3"
             href="https://www.linkedin.com/in/dilly-chen/"
             target="_blank"
             rel="noopener noreferrer"
             class="btn btn-lg btn-outline"
-            v-magnetic="0.3"
           >
             LinkedIn →
           </a>
@@ -217,9 +217,9 @@ const skills = {
               <div class="md:col-span-5">
                 <div class="flex flex-col gap-2.5">
                   <a
+                    v-magnetic="0.25"
                     href="mailto:byby325@gmail.com?subject=Hi%20Dilly%20%E2%80%94%20%5BProject%5D"
                     class="btn btn-lg btn-primary justify-between w-full"
-                    v-magnetic="0.25"
                   >
                     <span class="inline-flex items-center gap-2">
                       <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" /><polyline points="22,6 12,13 2,6" /></svg>

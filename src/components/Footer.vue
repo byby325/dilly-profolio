@@ -51,9 +51,9 @@ const social = [
         </p>
         <div class="flex flex-wrap gap-3 pt-2">
           <a
+            v-magnetic="0.25"
             href="mailto:byby325@gmail.com"
             class="btn btn-lg bg-white text-primary-950 hover:bg-primary-100 hover:-translate-y-0.5"
-            v-magnetic="0.25"
           >
             byby325@gmail.com
             <svg
