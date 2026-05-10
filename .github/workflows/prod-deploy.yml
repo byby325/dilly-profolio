@@ -46,9 +46,23 @@ jobs:
             echo "::error::FIREBASE_SERVICE_ACCOUNT secret is empty or not set"
             exit 1
           fi
+          # Print metadata about the secret WITHOUT leaking its value
+          python3 <<'PY'
+          import os
+          v = os.environ.get('FIREBASE_SERVICE_ACCOUNT', '')
+          print(f"FIREBASE_SERVICE_ACCOUNT length: {len(v)} bytes")
+          stripped = v.strip()
+          print(f"After strip length: {len(stripped)} bytes")
+          if stripped:
+              print(f"First non-whitespace char ord: {ord(stripped[0])} (123 = '{{')")
+              print(f"Last non-whitespace char ord: {ord(stripped[-1])} (125 = '}}')")
+          else:
+              print("Secret is whitespace-only — needs to contain the full JSON")
+          PY
           KEY_FILE="$RUNNER_TEMP/firebase-key.json"
           printf '%s' "$FIREBASE_SERVICE_ACCOUNT" > "$KEY_FILE"
           chmod 600 "$KEY_FILE"
+          echo "Key file size: $(wc -c < "$KEY_FILE") bytes"
           # Sanity-check the JSON (prints field names only, never values)
           python3 - "$KEY_FILE" <<'PY'
           import json, sys
