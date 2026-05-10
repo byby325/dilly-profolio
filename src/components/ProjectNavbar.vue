@@ -16,8 +16,6 @@ const activeItem = ref('')
 const mobileMenuOpen = ref(false)
 const isVisible = ref(true)
 
-let lastScroll = 0
-
 const handleScroll = () => {
   // Active section detection
   const sections = props.navItems.map((item) => document.getElementById(item.id))
@@ -39,7 +37,6 @@ const handleScroll = () => {
   const doc = document.documentElement
   const distanceToBottom = doc.scrollHeight - (window.scrollY + window.innerHeight)
   isVisible.value = distanceToBottom > 280
-  lastScroll = window.scrollY
 }
 
 const scrollToSection = (id: string) => {

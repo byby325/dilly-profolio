@@ -23,9 +23,7 @@ router.beforeResolve((_to, _from, next) => {
     started = true
     return next()
   }
-  // @ts-expect-error - 漸進式增強 API
   if (typeof document !== 'undefined' && document.startViewTransition) {
-    // @ts-expect-error
     document.startViewTransition(() => next())
   } else {
     next()
