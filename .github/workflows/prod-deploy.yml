@@ -37,10 +37,30 @@ jobs:
         run: tail -40 /tmp/build.log
 
       - name: Deploy to Firebase Production
-        uses: FirebaseExtended/action-hosting-deploy@v0
-        with:
-          repoToken: '${{ secrets.GITHUB_TOKEN }}'
-          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT }}'
-          projectId: dilly-portfolio
-          channelId: live
-          target: production 
+        env:
+          FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+        run: |
+          set -o pipefail
+          if [ -z "$FIREBASE_SERVICE_ACCOUNT" ]; then
+            echo "::error::FIREBASE_SERVICE_ACCOUNT secret is empty or not set"
+            exit 1
+          fi
+          # Write service account JSON to a tempfile and point Firebase CLI at it
+          KEY_FILE=$(mktemp)
+          printf '%s' "$FIREBASE_SERVICE_ACCOUNT" > "$KEY_FILE"
+          export GOOGLE_APPLICATION_CREDENTIALS="$KEY_FILE"
+          npx --yes firebase-tools@latest deploy \
+            --only hosting:production \
+            --project dilly-portfolio \
+            --non-interactive 2>&1 | tee /tmp/deploy.log
+          DEPLOY_EXIT=${PIPESTATUS[0]}
+          rm -f "$KEY_FILE"
+          exit "$DEPLOY_EXIT"
+
+      - name: Show deploy error tail
+        if: failure()
+        run: |
+          if [ -f /tmp/deploy.log ]; then
+            echo "=== last 40 lines of deploy log ==="
+            tail -40 /tmp/deploy.log
+          fi
