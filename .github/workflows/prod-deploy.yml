@@ -33,12 +33,22 @@ jobs:
           node --version
           npm --version
           npx vite --version || true
+          set -o pipefail
           npm run build 2>&1 | tee /tmp/build.log
-          BUILD_EXIT=${PIPESTATUS[0]}
-          if [ "$BUILD_EXIT" -ne 0 ]; then
-            tail -80 /tmp/build.log | while IFS= read -r line; do echo "::error::$line"; done
-            exit "$BUILD_EXIT"
-          fi
+        continue-on-error: true
+
+      - name: Surface build error
+        if: steps.build.outcome == 'failure'
+        run: |
+          echo "::group::Last 25 lines of build output"
+          tail -25 /tmp/build.log
+          echo "::endgroup::"
+          # Extract any line matching error keywords and emit as annotation
+          grep -niE "error|cannot find|enoent|enospc|out of memory|maximum call|failed to" /tmp/build.log | tail -20 | while IFS= read -r line; do
+            clean=$(echo "$line" | sed 's/\x1b\[[0-9;]*m//g')
+            echo "::error::$clean"
+          done
+          exit 1
 
       - name: Deploy to Firebase Production
         uses: FirebaseExtended/action-hosting-deploy@v0
