@@ -28,27 +28,13 @@ jobs:
         run: npm run type-check || echo "Type check failed but continuing"
 
       - name: Build
-        id: build
         run: |
-          node --version
-          npm --version
-          npx vite --version || true
           set -o pipefail
           npm run build 2>&1 | tee /tmp/build.log
-        continue-on-error: true
 
-      - name: Surface build error
-        if: steps.build.outcome == 'failure'
-        run: |
-          echo "::group::Last 25 lines of build output"
-          tail -25 /tmp/build.log
-          echo "::endgroup::"
-          # Extract any line matching error keywords and emit as annotation
-          grep -niE "error|cannot find|enoent|enospc|out of memory|maximum call|failed to" /tmp/build.log | tail -20 | while IFS= read -r line; do
-            clean=$(echo "$line" | sed 's/\x1b\[[0-9;]*m//g')
-            echo "::error::$clean"
-          done
-          exit 1
+      - name: Show build error tail
+        if: failure()
+        run: tail -40 /tmp/build.log
 
       - name: Deploy to Firebase Production
         uses: FirebaseExtended/action-hosting-deploy@v0
