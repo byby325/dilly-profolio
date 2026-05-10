@@ -128,8 +128,8 @@ const besides = Array.from({ length: 6 }, (_, i) => ({
       <div class="shell relative z-10 grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-16 items-center">
         <div v-reveal class="md:col-span-7 order-2 md:order-1">
           <span class="eyebrow eyebrow-accent eyebrow-dot mb-6">About</span>
-          <h1 class="text-display-xl text-balance">
-            Hi, I'm <span class="italic font-display">Dilly</span>
+          <h1 class="text-display-xl text-balance font-display font-bold">
+            Hi, I'm Dilly
             <span class="inline-block ml-2 origin-bottom-right hover:rotate-12 transition-transform duration-500">👋</span>
           </h1>
           <div class="space-y-4 mt-6 max-w-2xl text-pretty">
@@ -154,9 +154,6 @@ const besides = Array.from({ length: 6 }, (_, i) => ({
               LinkedIn
               <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7" /><path d="M7 7h10v10" /></svg>
             </a>
-            <RouterLink to="/resume" class="btn btn-lg btn-outline" v-magnetic="0.3">
-              View resume →
-            </RouterLink>
           </div>
         </div>
 
@@ -170,16 +167,6 @@ const besides = Array.from({ length: 6 }, (_, i) => ({
                 class="w-full h-full object-cover"
                 @error="handleImageError"
               />
-            </div>
-            <div
-              class="absolute -bottom-4 -left-4 md:-left-8 px-4 py-3 rounded-2xl bg-white shadow-card-hover border border-primary-100 max-w-[200px]"
-              aria-hidden="true"
-            >
-              <div class="flex items-center gap-2.5">
-                <span class="inline-block w-2 h-2 rounded-full bg-primary-900 animate-pulse-soft" />
-                <span class="text-xs font-semibold text-primary-900">Currently in Taipei</span>
-              </div>
-              <div class="text-[11px] text-primary-500 mt-1">Working on SaaS DesignOps</div>
             </div>
           </div>
         </div>
@@ -287,7 +274,7 @@ const besides = Array.from({ length: 6 }, (_, i) => ({
                   <div>
                     <h5 class="font-semibold text-primary-900 mb-1">Design System</h5>
                     <p class="text-primary-600 leading-relaxed">
-                      Architected and shipped a product design system using atomic design, variables, and components — improving consistency, flexibility, and design velocity.
+                      Architected and shipped a product design system using atomic design, variables, and components, improving consistency, flexibility, and design velocity.
                     </p>
                   </div>
                   <div>
@@ -299,7 +286,7 @@ const besides = Array.from({ length: 6 }, (_, i) => ({
                   <div>
                     <h5 class="font-semibold text-primary-900 mb-1">End-to-end SaaS</h5>
                     <p class="text-primary-600 leading-relaxed">
-                      Delivered multiple SaaS projects end-to-end — from kick-off and exploratory research to wireframing, hi-fi prototyping, usability testing, and front-end slicing.
+                      Delivered multiple SaaS projects end-to-end, covering kick-off, exploratory research, wireframing, hi-fi prototyping, usability testing, and front-end slicing.
                     </p>
                   </div>
                   <div>
@@ -347,7 +334,7 @@ const besides = Array.from({ length: 6 }, (_, i) => ({
                   Applying biological information visualization to interactive design
                 </h4>
                 <p class="text-primary-600 leading-relaxed text-sm">
-                  Mobile applications for Taiwan's endemic birds. I assisted with early-stage research and design tasks — avian visualization, organizing references, analyzing interviews, planning user flows, and designing wireframes.
+                  Mobile applications for Taiwan's endemic birds. I assisted with early-stage research and design tasks, including avian visualization, organizing references, analyzing interviews, planning user flows, and designing wireframes.
                 </p>
               </div>
             </div>

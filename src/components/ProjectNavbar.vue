@@ -106,7 +106,7 @@ onUnmounted(() => {
   </Transition>
 
   <!-- Mobile floating button + sheet -->
-  <div v-if="showOnMobile" class="block xl:hidden fixed right-4 bottom-6 z-40">
+  <div v-if="showOnMobile" class="block xl:hidden fixed right-4 bottom-[calc(env(safe-area-inset-bottom)+1.5rem)] z-40">
     <button
       type="button"
       class="w-12 h-12 inline-flex items-center justify-center rounded-full bg-primary-900 text-white shadow-card-hover transition-transform duration-300 ease-out-expo hover:scale-105"

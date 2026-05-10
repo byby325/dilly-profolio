@@ -64,7 +64,6 @@ onUnmounted(() => {
 const navItems = [
   { to: '/', label: 'Work' },
   { to: '/about', label: 'About' },
-  { to: '/resume', label: 'Resume' },
 ]
 
 const navClasses = computed(() => [
@@ -76,7 +75,7 @@ const navClasses = computed(() => [
 </script>
 
 <template>
-  <div class="flex flex-col min-h-screen">
+  <div class="flex flex-col min-h-[100dvh]">
     <CustomCursor />
 
     <!-- Navigation -->
@@ -88,13 +87,11 @@ const navClasses = computed(() => [
           class="group flex items-center gap-3"
           aria-label="Dilly Chen — back to home"
         >
-          <span class="relative inline-flex w-10 h-10 items-center justify-center rounded-xl bg-primary-900 text-white font-display font-semibold text-sm shadow-soft overflow-hidden transition-transform duration-500 ease-out-expo group-hover:scale-105">
-            <span class="relative z-10">DC</span>
-          </span>
-          <span class="hidden sm:inline-flex flex-col leading-none">
-            <span class="font-display text-sm font-semibold tracking-tight text-primary-900">Dilly Chen</span>
-            <span class="text-[11px] text-primary-500 mt-0.5">Senior Product Designer</span>
-          </span>
+          <img
+            src="/logo-dilly.png"
+            alt="Dilly Chen"
+            class="w-10 h-10 object-contain transition-transform duration-500 ease-out-expo group-hover:scale-105"
+          />
         </RouterLink>
 
         <!-- Desktop Navigation -->
@@ -114,7 +111,9 @@ const navClasses = computed(() => [
         <!-- CTA -->
         <div class="hidden md:flex items-center gap-2">
           <a
-            href="mailto:byby325@gmail.com"
+            href="https://www.linkedin.com/in/dilly-chen/"
+            target="_blank"
+            rel="noopener noreferrer"
             class="btn btn-primary"
             v-magnetic="0.25"
           >
@@ -167,7 +166,9 @@ const navClasses = computed(() => [
               {{ item.label }}
             </RouterLink>
             <a
-              href="mailto:byby325@gmail.com"
+              href="https://www.linkedin.com/in/dilly-chen/"
+              target="_blank"
+              rel="noopener noreferrer"
               class="mt-2 btn btn-primary w-full justify-center"
             >
               Let's talk →

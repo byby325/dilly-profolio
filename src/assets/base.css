@@ -117,7 +117,7 @@ html {
 }
 
 body {
-  min-height: 100vh;
+  min-height: 100dvh;
   color: var(--color-ink-soft);
   background: var(--color-bg);
   line-height: 1.6;

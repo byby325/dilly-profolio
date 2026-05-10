@@ -7,7 +7,6 @@ const year = new Date().getFullYear()
 const links = [
   { label: 'Work', to: '/' },
   { label: 'About', to: '/about' },
-  { label: 'Resume', to: '/resume' },
 ]
 
 const social = [
@@ -18,10 +17,6 @@ const social = [
   {
     label: 'Email',
     href: 'mailto:byby325@gmail.com',
-  },
-  {
-    label: 'Medium',
-    href: 'https://medium.com/@dilly_chen',
   },
 ]
 </script>
@@ -52,7 +47,7 @@ const social = [
         </h2>
         <p class="text-primary-300 max-w-xl">
           I'm always open to chatting about SaaS product design, design systems, or
-          DesignOps. Drop a note any time — I usually reply within a day.
+          DesignOps. Drop a note any time, and I usually reply within a day.
         </p>
         <div class="flex flex-wrap gap-3 pt-2">
           <a
@@ -90,9 +85,12 @@ const social = [
 
       <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-sm">
         <div class="col-span-2">
-          <div class="flex items-center gap-3 mb-4">
-            <span class="inline-flex w-9 h-9 items-center justify-center rounded-xl bg-white text-primary-950 font-display font-semibold">DC</span>
-            <span class="font-display font-semibold tracking-tight">Dilly Chen</span>
+          <div class="flex items-center mb-4">
+            <img
+              src="/logo-dilly.png"
+              alt="Dilly Chen"
+              class="w-10 h-10 object-contain"
+            />
           </div>
           <p class="text-primary-300 max-w-sm leading-relaxed">
             Senior Product Designer crafting end-to-end SaaS experiences that balance
@@ -150,10 +148,6 @@ const social = [
 
       <div class="mt-12 flex flex-col-reverse gap-4 md:flex-row md:items-center md:justify-between text-xs text-primary-400">
         <p>© {{ year }} Dilly Chen. Designed &amp; built with care.</p>
-        <p class="inline-flex items-center gap-2">
-          <span class="inline-block w-1.5 h-1.5 rounded-full bg-white animate-pulse-soft" />
-          Currently open to product design collaborations.
-        </p>
       </div>
     </div>
   </footer>

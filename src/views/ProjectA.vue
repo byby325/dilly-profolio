@@ -60,7 +60,7 @@ function backToHome() {
             </div>
           </div>
 
-          <div class="flex flex-col justify-center text-center md:text-left">
+          <div class="min-w-0 flex-1 flex flex-col justify-center text-center md:text-left">
             <span class="eyebrow eyebrow-accent eyebrow-dot mx-auto md:mx-0 mb-3">Case study · 2019</span>
             <h1 class="text-display-lg font-display font-semibold tracking-tight">MOODZiNE</h1>
             <p class="text-base md:text-lg text-primary-500 mt-2 italic">Feel who you are, embrace who you are.</p>

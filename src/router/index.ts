@@ -24,34 +24,10 @@ const router = createRouter({
       meta: { title: 'About — Dilly Chen' },
     },
     {
-      path: '/resume',
-      name: 'resume',
-      component: () => import('../views/Resume.vue'),
-      meta: { title: 'Resume — Dilly Chen' },
-    },
-    {
       path: '/project/moodzine',
       name: 'project-moodzine',
       component: () => import('../views/ProjectA.vue'),
       meta: { title: 'MOODZiNE — Case Study' },
-    },
-    {
-      path: '/project/firefoxlite',
-      name: 'project-firefoxlite',
-      component: () => import('../views/ProjectB.vue'),
-      meta: { title: 'Firefox Lite — Case Study' },
-    },
-    {
-      path: '/project/iotion',
-      name: 'project-iotion',
-      component: () => import('../views/ProjectC.vue'),
-      meta: { title: 'IOTION — Case Study' },
-    },
-    {
-      path: '/project/blossom',
-      name: 'project-blossom',
-      component: () => import('../views/ProjectD.vue'),
-      meta: { title: 'Blossom — Case Study' },
     },
     {
       path: '/design-methods',

@@ -64,7 +64,7 @@ const projects: Project[] = [
     tags: ['Firefox Lite', 'UI/UX Design', 'How Might We'],
     description:
       'Mozilla Campus Seeding Program 案例。聚焦瀏覽器「閱讀模式」與「分享功能」的流程與版面再設計，提升跨裝置一致性與流暢度，讓輕量化瀏覽器擁有更舒適的閱讀體驗。',
-    cta: { label: 'Coming soon', href: 'javascript:void(0)' },
+    cta: { label: 'Coming soon' },
   },
   {
     id: 'iotion',
@@ -76,7 +76,7 @@ const projects: Project[] = [
     tags: ['UI/UX Design', 'User Research', 'Usability Test'],
     description:
       '從問卷調查、實際訪談來定義問題，深入探討網路交友的心理需求與互動行為。透過競品分析了解市場狀況，創造一個輕鬆自然的交友過程。',
-    cta: { label: 'Coming soon', href: 'javascript:void(0)' },
+    cta: { label: 'Coming soon' },
   },
   {
     id: 'blossom',
@@ -88,7 +88,7 @@ const projects: Project[] = [
     tags: ['Service Design', 'UI Design', 'Interview Research'],
     description:
       '與輔仁大學苗圃設計思考工作坊合作，聚焦於高齡族群的日常復健需求。透過動作引導與即時感測回饋，協助長者進行伸展運動，紀錄身體狀況並達到預防與改善健康的目標。',
-    cta: { label: 'Coming soon', href: 'javascript:void(0)' },
+    cta: { label: 'Coming soon' },
   },
 ]
 
@@ -277,11 +277,10 @@ onUnmounted(() => {
           <!-- Headline -->
           <h1
             v-reveal
-            class="text-display-2xl text-balance leading-[0.95] text-primary-950"
+            class="text-display-2xl text-balance leading-[0.95] text-primary-950 font-display font-bold"
             :style="{ transform: `translate3d(${heroX * 0.4}px, ${heroY * 0.4}px, 0)` }"
           >
-            Hello, I'm
-            <span class="italic font-display">Dilly Chen</span>.
+            Hello, I'm Dilly Chen.
           </h1>
 
           <!-- Subheading -->
@@ -349,7 +348,7 @@ onUnmounted(() => {
             </div>
             <div>
               <div class="text-display-sm font-display font-semibold text-primary-900">∞</div>
-              <div class="text-sm text-primary-500 mt-1">Curious by default</div>
+              <div class="text-sm text-primary-500 mt-1">Data-informed by default</div>
             </div>
           </div>
         </div>
@@ -360,7 +359,6 @@ onUnmounted(() => {
           class="absolute bottom-6 md:bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-xs uppercase tracking-[0.25em] text-primary-500 hover:text-primary-900 transition-colors"
           aria-label="Scroll down"
         >
-          <span>Scroll</span>
           <div class="w-12 h-12">
             <LottieAnimation
               ref="arrowDownRef"
@@ -471,15 +469,14 @@ onUnmounted(() => {
                       <path d="M5 12h14" /><path d="m12 5 7 7-7 7" />
                     </svg>
                   </RouterLink>
-                  <a
+                  <span
                     v-else
-                    :href="p.cta.href"
-                    class="link-underline inline-flex items-center gap-1.5 text-primary-300"
+                    class="inline-flex items-center gap-1.5 text-xs uppercase tracking-[0.2em] text-primary-400 px-3 py-1.5 rounded-full bg-white/5 border border-white/10"
                     aria-disabled="true"
                   >
+                    <span class="inline-block w-1.5 h-1.5 rounded-full bg-primary-400 animate-pulse-soft" />
                     {{ p.cta.label }}
-                    <span aria-hidden="true">→</span>
-                  </a>
+                  </span>
                 </div>
               </div>
             </div>

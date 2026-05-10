@@ -2,6 +2,132 @@
 
 本文檔記錄了如何部署 Dilly Portfolio 到 Firebase Hosting，包括測試環境和生產環境的設置，以及版本管理和自動化工作流程。
 
+---
+
+## 日常發版 SOP（Quick Reference）
+
+從「本地有改動」到「production 上線」的完整流程，照順序跑即可。
+
+> 環境：repo `byby325/dilly-profolio`，目前主分支 `main`。GitHub Actions 已設定為 push 到 `main` 會自動 build + deploy 到 production。
+
+### 推薦流程：透過 GitHub Actions 自動部署
+
+#### Step 1 — 確認當前狀態
+
+```bash
+cd /Users/dilly.chen29/Project/profolio/dilly-profolio
+
+# 看目前的修改與 untracked files
+git status
+
+# 看具體 diff（可加檔名只看單一檔）
+git diff
+```
+
+#### Step 2 — 本地驗證能 build 過
+
+```bash
+# 先跑 build 確認沒有編譯錯誤
+npm run build
+
+# (可選) 本地預覽 production bundle
+npm run preview
+# 預設打開 http://localhost:4173 — 開瀏覽器點一遍主要頁面
+```
+
+如果 build 失敗，先修錯再進下一步。**不要把跑不過的程式碼推上 main**。
+
+#### Step 3 — commit 變更
+
+```bash
+# 加入要 commit 的檔案（建議列出具體檔名，避免帶到非預期的檔）
+git add src/App.vue src/views/Home.vue src/views/About.vue src/components/Footer.vue src/router/index.ts
+# ... 視實際變更而定
+
+# 寫 commit message — 簡述「為什麼改」
+git commit -m "feat: hide WIP project pages, refresh hero copy and footer"
+```
+
+> Commit message 慣例：`feat:` 新功能 / `fix:` 修 bug / `chore:` 雜項 / `docs:` 文件 / `style:` 純樣式調整 / `refactor:` 重構。
+
+#### Step 4 — push 到 main → 觸發自動部署
+
+```bash
+git push origin main
+```
+
+#### Step 5 — 觀察 CI 跑完
+
+打開 GitHub Actions 頁面看 workflow 狀態：
+
+```
+https://github.com/byby325/dilly-profolio/actions
+```
+
+「Deploy to Production」 跑綠燈即代表 deploy 完成。
+
+#### Step 6 — 驗收 production
+
+開實際網址點一遍主要頁面（Home / About / 第一個 case study / footer 連結），確認改動有上線、沒有壞掉。
+
+```
+https://dillychen.com
+https://dilly-portfolio.web.app
+```
+
+---
+
+### 備援流程：本地手動部署
+
+CI 出問題、或臨時要 hotfix 時用。
+
+```bash
+cd /Users/dilly.chen29/Project/profolio/dilly-profolio
+
+# 1. build
+npm run build
+
+# 2. (建議先驗 testing 環境)
+firebase deploy --only hosting:testing
+# → 開 https://dilly-portfolio.web.app 驗收
+
+# 3. 確認 ok 後再推 production
+firebase deploy --only hosting:production
+# → 開 https://dillychen.com 驗收
+```
+
+> ⚠️ 手動 deploy 不會自動產生 git commit。如果只 deploy 沒 commit，production 上的版本會跟 git 歷史對不上 — 之後要排查問題會很痛。**手動 deploy 後仍建議補一個 commit + push 來留紀錄**。
+
+---
+
+### 部署前快速檢查清單
+
+- [ ] `npm run build` 本地通過
+- [ ] `npm run preview` 大略點過主要頁面
+- [ ] 沒有把實驗性檔案/敏感資料加進 commit（檢查 `git status` 和 `git diff --staged`）
+- [ ] commit message 寫清楚「為什麼改」
+- [ ] push 後到 GitHub Actions 看 workflow 是否綠燈
+- [ ] 上線後實際開 production 網址驗收
+
+### 出包了怎麼辦？— 快速回退
+
+```bash
+# 找出上一個穩定 commit
+git log --oneline -10
+
+# 回退到該 commit 並覆蓋 main（會觸發新一次 deploy）
+git revert HEAD          # 推薦：產生反向 commit，留下紀錄
+git push origin main
+
+# 如果 CI 也壞掉，可以本地直接 deploy 上一版
+git checkout <good-commit-sha>
+npm run build
+firebase deploy --only hosting:production
+git checkout main
+```
+
+---
+
 ## 環境設置
 
 本專案使用兩個環境：

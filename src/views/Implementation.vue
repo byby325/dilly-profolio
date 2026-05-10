@@ -226,7 +226,7 @@ const difficultyTone = (d: Tool['difficulty']) => {
             data-cursor-hover
           >
             <div class="flex items-start justify-between gap-3 mb-2">
-              <h3 class="text-lg font-display font-semibold text-primary-900 leading-snug">
+              <h3 class="min-w-0 flex-1 text-lg font-display font-semibold text-primary-900 leading-snug break-words">
                 {{ tool.name }}
               </h3>
               <span class="tag-soft flex-shrink-0">{{ getCategoryName(tool.category) }}</span>

@@ -57,7 +57,7 @@ const experience: Item[] = [
     period: '2019.07 — 2020.07',
     duration: researchPeriod.value,
     bullets: [
-      'Applying biological information visualization to interactive design — mobile apps for Taiwan\'s endemic birds.',
+      'Applying biological information visualization to interactive design through mobile apps for Taiwan\'s endemic birds.',
       'Avian visualization, references, interview analysis, user flows, and wireframing.',
     ],
   },
@@ -201,7 +201,7 @@ const skills = {
               <span class="hairline flex-1 ml-2" />
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-10 items-end">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-10 md:items-center">
               <div class="md:col-span-7">
                 <h3 class="text-2xl md:text-[2rem] leading-[1.15] font-display font-semibold tracking-tight text-primary-900 text-balance">
                   Hiring a senior product designer?
