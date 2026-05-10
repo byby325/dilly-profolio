@@ -39,16 +39,33 @@ jobs:
       - name: Deploy to Firebase Production
         env:
           FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+          GCLOUD_PROJECT: dilly-portfolio
         run: |
           set -o pipefail
           if [ -z "$FIREBASE_SERVICE_ACCOUNT" ]; then
             echo "::error::FIREBASE_SERVICE_ACCOUNT secret is empty or not set"
             exit 1
           fi
-          # Write service account JSON to a tempfile and point Firebase CLI at it
-          KEY_FILE=$(mktemp)
+          KEY_FILE="$RUNNER_TEMP/firebase-key.json"
           printf '%s' "$FIREBASE_SERVICE_ACCOUNT" > "$KEY_FILE"
+          chmod 600 "$KEY_FILE"
+          # Sanity-check the JSON (prints field names only, never values)
+          python3 - "$KEY_FILE" <<'PY'
+          import json, sys
+          try:
+              d = json.load(open(sys.argv[1]))
+              print("Service account JSON parsed OK")
+              print("Fields present:", sorted(d.keys()))
+              print("type:", d.get("type", "MISSING"))
+              print("project_id:", d.get("project_id", "MISSING"))
+              print("client_email present:", bool(d.get("client_email")))
+              print("private_key present:", bool(d.get("private_key")))
+          except Exception as e:
+              print(f"::error::Service account JSON failed to parse: {e}")
+              sys.exit(1)
+          PY
           export GOOGLE_APPLICATION_CREDENTIALS="$KEY_FILE"
+          npx --yes firebase-tools@latest --version
           npx --yes firebase-tools@latest deploy \
             --only hosting:production \
             --project dilly-portfolio \
